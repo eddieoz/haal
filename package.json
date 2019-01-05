@@ -4,7 +4,7 @@
   "description": "Hääl",
   "main": "haal.js",
   "scripts": {
-    "test": "mocha -d"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -35,8 +35,7 @@
     "mocha": "^5.2.0",
     "paillier-bignum": "^1.1.2",
     "paillier-in-set-zkp": "git+https://github.com/eddieoz/paillier-in-set-zkp.git",
-    "paillier-js": "^0.9.2",
-    "snarkjs": "^0.1.9",
-    "stealth": "git+https://github.com/eddieoz/stealth.git"
+    "stealth_eth": "git+https://github.com/eddieoz/stealth_eth.git",
+    "snarkjs": "^0.1.9"
   }
 }

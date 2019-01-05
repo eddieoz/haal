@@ -6,7 +6,7 @@ const zkSnark = require('snarkjs');
 const { stringifyBigInts, unstringifyBigInts } = require("../node_modules/snarkjs/src/stringifybigint.js");
 const fs = require('fs');
 const crypto = require('crypto-browserify');
-const Stealth = require('stealth');
+const Stealth = require('stealth_eth');
 const ethereum = require('ethereumjs-utils');
 const coinkey = require('coinkey');
 
