@@ -10,7 +10,28 @@ const Stealth = require('stealth_eth');
 const ethereum = require('ethereumjs-utils');
 const coinkey = require('coinkey');
 
+// ### Web3 Connection
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'));
+
+// ### Artifacts
+const Verifier = artifacts.require('./contracts/HAAL/verifier.sol');
+
 const assert = chai.assert;
+
+contract('HAALVerifier', (accounts) => {
+    let aztec;
+    // Creating a collection of tests that should pass
+    describe('Install contracts and test', () => {
+        beforeEach(async () => {
+            haalVerifier = await Verifier.new(accounts[0]);
+        });
+        it('Test Verifier contract', async () => {
+            result = await haalVerifier.verifyProof(["0x2c84985e8a82224efd880d654b1a430d2d7e6d864e654e43c31b7e43322b5df3", "0x1a843dedf3161114f8ec663464f51d776340b8f438f111195b41f0b792970ea4"],["0x064c813a7a3c088347ad8eca7ea7c1d3e356549a88bf006d60a73c8ccf27d990", "0x1d9e60915e69d8b40300462037bf85a95a1cfe221086c08f9d1f64fd95900375"],[["0x1f00d24266b58e1b08fe5c928a142142c5b80b94e0f2ff75d3a1a0a9a5892bee", "0x2b5c78d5f66a4a5ab24fc2274ac88797bb9a05c421f1ec37fdb13ebaaa5974f6"],["0x1b76774597bbc9abd4770e7289842ca848888252090a2a4c9232d86fbb2613fd", "0x19748f7c3ba25757902b246ebe74128650091a665bf2becbe444a2b247d8a33d"]],["0x19bfb05a3c8417018f53ebd6129b77ede2e73787906201e9609ba49ef12337d0", "0x120932674cf2f7afc009faa5417b3ab79ca8e65e683cba2c5b59e92eb3e07f22"],["0x238ce555518c7dc8579aaac7c68f5606e89fe015f6c66f4a7efcfc1f4644925e", "0x04106700c74ee240df3b1ed5622bfa9a56d6ee939c5c9c318356c91982874332"],["0x155ebde28a04cad19d6005f2254f61db934d5ccc79370945110c1d393816cdfc", "0x1c22ed448f7d3611c3bde84528b15b5104e5f55c04c72f8cd4bdbc40d7c0f31d"],["0x213ffc72560b74fd2c59a7bd7bf8f87b3bbaa9df640c674d99d859651311de6e", "0x0552eacdaf912da9fb7e9fcd108c7e799935927e67a5b6cde5f8a092cd783d7c"],["0x0e4905bfee808d40839cdc975249cad3710a3b3371babfbfad1d9dee4124f30e", "0x1d40edd5ade6d8c28e7d12aa652331c49ac9d90a14831290b69c94e3b97209ae"],["0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000003","0x0000000000000000000000000000000000000000000000000000000000000004","0x0000000000000000000000000000000000000000000000000000000000000002","0x0000000000000000000000000000000000000000000000000000000000000004"]);
+            assert.isTrue(result);
+        })
+    });
+});
 
 describe("Create and test an ethereum stealth wallet", () => {
     // you need to scan every transaction and look for the following:
@@ -285,4 +306,6 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
     }).timeout(10000000);
 
 });
+
+contract
 

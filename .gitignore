@@ -1,3 +1,4 @@
+build/contracts/*.json
 launch.json
 vote-proof*.json
 myCircuit*
