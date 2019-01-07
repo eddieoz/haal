@@ -4,7 +4,7 @@
   "description": "Hääl",
   "main": "haal.js",
   "scripts": {
-    "test": "mocha"
+    "test": "truffle test"
   },
   "repository": {
     "type": "git",

@@ -9,29 +9,55 @@ const crypto = require('crypto-browserify');
 const Stealth = require('stealth_eth');
 const ethereum = require('ethereumjs-utils');
 const coinkey = require('coinkey');
+const generateCall = require('../src/generateCall.js');
+const web3Utils = require('web3-utils');
 
 // ### Web3 Connection
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'));
 
 // ### Artifacts
-const Verifier = artifacts.require('./contracts/HAAL/verifier.sol');
+const Verifier = artifacts.require('../contracts/HAAL/verifier.sol');
+const Haal = artifacts.require('../contracts/HAAL/haal.sol')
 
 const assert = chai.assert;
 
+let verifierAddress = '';
+let verifierAbi = '';
+let haalVerifier = '';
+
 contract('HAALVerifier', (accounts) => {
-    let aztec;
     // Creating a collection of tests that should pass
     describe('Install contracts and test', () => {
         beforeEach(async () => {
-            haalVerifier = await Verifier.new(accounts[0]);
+            haalVerifier = await Verifier.new(accounts[0]);  
+            haal = await Haal.new('ballot0001', 0x7b226e223a22313234363239353037393136353933303037);  
+            verifierAbi = await haalVerifier.abi;
+            verifierAddress = await haalVerifier.address;
         });
+        
         it('Test Verifier contract', async () => {
-            result = await haalVerifier.verifyProof(["0x2c84985e8a82224efd880d654b1a430d2d7e6d864e654e43c31b7e43322b5df3", "0x1a843dedf3161114f8ec663464f51d776340b8f438f111195b41f0b792970ea4"],["0x064c813a7a3c088347ad8eca7ea7c1d3e356549a88bf006d60a73c8ccf27d990", "0x1d9e60915e69d8b40300462037bf85a95a1cfe221086c08f9d1f64fd95900375"],[["0x1f00d24266b58e1b08fe5c928a142142c5b80b94e0f2ff75d3a1a0a9a5892bee", "0x2b5c78d5f66a4a5ab24fc2274ac88797bb9a05c421f1ec37fdb13ebaaa5974f6"],["0x1b76774597bbc9abd4770e7289842ca848888252090a2a4c9232d86fbb2613fd", "0x19748f7c3ba25757902b246ebe74128650091a665bf2becbe444a2b247d8a33d"]],["0x19bfb05a3c8417018f53ebd6129b77ede2e73787906201e9609ba49ef12337d0", "0x120932674cf2f7afc009faa5417b3ab79ca8e65e683cba2c5b59e92eb3e07f22"],["0x238ce555518c7dc8579aaac7c68f5606e89fe015f6c66f4a7efcfc1f4644925e", "0x04106700c74ee240df3b1ed5622bfa9a56d6ee939c5c9c318356c91982874332"],["0x155ebde28a04cad19d6005f2254f61db934d5ccc79370945110c1d393816cdfc", "0x1c22ed448f7d3611c3bde84528b15b5104e5f55c04c72f8cd4bdbc40d7c0f31d"],["0x213ffc72560b74fd2c59a7bd7bf8f87b3bbaa9df640c674d99d859651311de6e", "0x0552eacdaf912da9fb7e9fcd108c7e799935927e67a5b6cde5f8a092cd783d7c"],["0x0e4905bfee808d40839cdc975249cad3710a3b3371babfbfad1d9dee4124f30e", "0x1d40edd5ade6d8c28e7d12aa652331c49ac9d90a14831290b69c94e3b97209ae"],["0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000003","0x0000000000000000000000000000000000000000000000000000000000000004","0x0000000000000000000000000000000000000000000000000000000000000002","0x0000000000000000000000000000000000000000000000000000000000000004"]);
+            let result = await haalVerifier.verifyProof(["0x15a03b6fea56f86e2a4c5493638631cdd96c5ff04ba923b8929661b5cf08d54e", "0x09f03215ee03baed9387ea73d77a24245b7832b75d8d0dfa59036fef7e8f50b7"],["0x2e0711108b06327f4be135df82d8f53093b589fad6b184d73a14250fd8c1760e", "0x17fd395da1b14690af6ea55b3d73387ec3641bc879fc3ec9b5ae07b0b177962e"],[["0x0ab08ac7f1e68307d4f1e7b5b31fd4c02696fdde4e61936130fa559242e9e249", "0x03e214d382339d7e767590c8001c62d66b0cfc95a0137afde8db8e112da2a224"],["0x1b52b5bb1b52bd0bbc645ea962ca59f7d034b1837d8d7ca4bbfe8359b88486b4", "0x2b8a227ac1d4510ce2a95f348d6c9ece5d141cb7279b64e5af3d79dab88fe777"]],["0x067e57648b5c75a6a57b5e67f914ec5556bba9abbd86d81cfa145c63ced459db", "0x2e4a4af5e80e87079c4110eb5133bc3cd0cb32cec4d48d288d4d90e6004a05f1"],["0x0e62b3f617a46b25dacb729f3bc6aa0a254691a458df28e72c9b972c207e136a", "0x20f4c8ab3d688769662799d0ac340cdc18be28d49102b6f0fada9d2145a34115"],["0x165d6a818b91a6e93b9728aa43e368282430f27b9c9e4dab7fa7f3a89bc7fc32", "0x1536736b58990e4be37e5457f3ce397ddd2aeafe3ce6606993b3c17509b0ae3c"],["0x0032cb6e404cf17d11cb1ca8b22a38a38143770a21d8b7d81e1b2cd06d41efdd", "0x025e3460012c3322cb7485e4fbd6d360f7f1fb5681f9256abf81cc6e4ca7f1aa"],["0x0a77dd988c44b2b79ef87d19bc7e2b32e0d31621c5b0f2054c102f0cb36fe46e", "0x0e9d81f5641f6fe63354fb69758dc7853625b4405a957a3923e39b6c123ec2c2"],["0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000003","0x0000000000000000000000000000000000000000000000000000000000000004","0x0000000000000000000000000000000000000000000000000000000000000002","0x0000000000000000000000000000000000000000000000000000000000000004"]);
             assert.isTrue(result);
-        })
+        });
+
+        it('Test Haal contract', async () => {
+            let result = await haal.ballotIdentifier().then(function (res) {
+                return(res);
+            })
+            assert.equal('0x62616c6c6f743030303100000000000000000000000000000000000000000000', result.toString());
+        });
+
+        it("Verify proof on smartcontract", async () => {
+            let proof = JSON.parse(fs.readFileSync("./test/circuit/test_trusted_setup/proof.json", "utf8"));
+            let publicSignals = JSON.parse(fs.readFileSync("./test/circuit/test_trusted_setup/public.json", "utf8"));
+            var verifyCall = await generateCall(publicSignals, proof);  
+            result = await haalVerifier.verifyProof.call(verifyCall);
+            console.log("result: ", result); 
+        });
     });
 });
+
 
 describe("Create and test an ethereum stealth wallet", () => {
     // you need to scan every transaction and look for the following:
@@ -218,6 +244,13 @@ describe("Create vote and zksnark of vote", () => {
         const vk_verifier = setup.vk_verifier;
         assert.isTrue(zkSnark.groth.isValid(vk_verifier, proof.proof, proof.publicSignals));
     }).timeout(10000000);
+
+    // it("Verify proof on smartcontract", async () => {
+    //     var verifyCall = generateCall(proof.publicSignals, proof.proof);
+    //     console.log(verifyCall);
+    //     let result = await haalVerifier.verifyProof(verifyCall);
+    //     assert.isTrue(result); 
+    // });
 });
 
 describe("Encrypt, count, decrypt and test votes result proof", () => {
@@ -304,8 +337,6 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         let decrypted = privateKey.decrypt(encrypted);
         assert(result == true && decrypted == voteCount);
     }).timeout(10000000);
-
 });
 
-contract
 

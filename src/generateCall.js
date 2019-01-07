@@ -1,4 +1,5 @@
 /* forked from snarkjs cli */
+const {stringifyBigInts, unstringifyBigInts} = require("../node_modules/snarkjs/src/stringifybigint.js");
 
 function p256(n) {
     let nstr = n.toString(16);
@@ -8,6 +9,14 @@ function p256(n) {
 }
 
 function generateCall(publicSignals, proof){
+    
+    // publicSignals = unstringifyBigInts(JSON.parse(JSON.stringify(publicSignals), "utf8"));
+    // proof = unstringifyBigInts(JSON.parse(JSON.stringify(proof), "utf8"));
+
+    publicSignals = unstringifyBigInts(publicSignals);
+    proof = unstringifyBigInts(proof);
+    
+
     let inputs = "";
 
     for (let i=0; i<publicSignals.length; i++) {
