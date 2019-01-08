@@ -11,6 +11,7 @@ const ethereum = require('ethereumjs-utils');
 const coinkey = require('coinkey');
 const generateCall = require('../src/generateCall.js');
 const web3Utils = require('web3-utils');
+const Tx = require('ethereumjs-tx');
 
 // ### Web3 Connection
 const Web3 = require('web3');
@@ -23,50 +24,43 @@ const Haal = artifacts.require('../contracts/HAAL/haal.sol')
 const assert = chai.assert;
 
 let verifierAddress = '';
-let verifierAbi = '';
 let haalVerifier = '';
+let haal = '';
+let allAccounts = '';
 
 contract('HAALVerifier', (accounts) => {
     // Creating a collection of tests that should pass
     describe('Install contracts and test', () => {
         beforeEach(async () => {
-            haalVerifier = await Verifier.new(accounts[0]);  
-            haal = await Haal.new('ballot0001', 0x7b226e223a22313234363239353037393136353933303037);  
+            haalVerifier = await Verifier.new(accounts[0]);
             verifierAbi = await haalVerifier.abi;
             verifierAddress = await haalVerifier.address;
-        });
-        
-        it('Test Verifier contract', async () => {
-            let result = await haalVerifier.verifyProof(["0x15a03b6fea56f86e2a4c5493638631cdd96c5ff04ba923b8929661b5cf08d54e", "0x09f03215ee03baed9387ea73d77a24245b7832b75d8d0dfa59036fef7e8f50b7"],["0x2e0711108b06327f4be135df82d8f53093b589fad6b184d73a14250fd8c1760e", "0x17fd395da1b14690af6ea55b3d73387ec3641bc879fc3ec9b5ae07b0b177962e"],[["0x0ab08ac7f1e68307d4f1e7b5b31fd4c02696fdde4e61936130fa559242e9e249", "0x03e214d382339d7e767590c8001c62d66b0cfc95a0137afde8db8e112da2a224"],["0x1b52b5bb1b52bd0bbc645ea962ca59f7d034b1837d8d7ca4bbfe8359b88486b4", "0x2b8a227ac1d4510ce2a95f348d6c9ece5d141cb7279b64e5af3d79dab88fe777"]],["0x067e57648b5c75a6a57b5e67f914ec5556bba9abbd86d81cfa145c63ced459db", "0x2e4a4af5e80e87079c4110eb5133bc3cd0cb32cec4d48d288d4d90e6004a05f1"],["0x0e62b3f617a46b25dacb729f3bc6aa0a254691a458df28e72c9b972c207e136a", "0x20f4c8ab3d688769662799d0ac340cdc18be28d49102b6f0fada9d2145a34115"],["0x165d6a818b91a6e93b9728aa43e368282430f27b9c9e4dab7fa7f3a89bc7fc32", "0x1536736b58990e4be37e5457f3ce397ddd2aeafe3ce6606993b3c17509b0ae3c"],["0x0032cb6e404cf17d11cb1ca8b22a38a38143770a21d8b7d81e1b2cd06d41efdd", "0x025e3460012c3322cb7485e4fbd6d360f7f1fb5681f9256abf81cc6e4ca7f1aa"],["0x0a77dd988c44b2b79ef87d19bc7e2b32e0d31621c5b0f2054c102f0cb36fe46e", "0x0e9d81f5641f6fe63354fb69758dc7853625b4405a957a3923e39b6c123ec2c2"],["0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000001","0x0000000000000000000000000000000000000000000000000000000000000003","0x0000000000000000000000000000000000000000000000000000000000000004","0x0000000000000000000000000000000000000000000000000000000000000002","0x0000000000000000000000000000000000000000000000000000000000000004"]);
-            assert.isTrue(result);
+            haal = await Haal.new(web3Utils.toHex('ballot0001'), '0x7b226e223a22313234363239353037393136353933303037', verifierAddress);
+            allAccounts = accounts;
         });
 
         it('Test Haal contract', async () => {
-            let result = await haal.ballotIdentifier().then(function (res) {
-                return(res);
+            result = await haal.ballotIdentifier().then(function (res) {
+                return (res);
             })
             assert.equal('0x62616c6c6f743030303100000000000000000000000000000000000000000000', result.toString());
         });
 
-        it("Verify proof on smartcontract", async () => {
+        it("Verify zk vote proof on smartcontract", async () => {
             let proof = JSON.parse(fs.readFileSync("./test/circuit/test_trusted_setup/proof.json", "utf8"));
             let publicSignals = JSON.parse(fs.readFileSync("./test/circuit/test_trusted_setup/public.json", "utf8"));
-            var verifyCall = await generateCall(publicSignals, proof);  
-            result = await haalVerifier.verifyProof.call(verifyCall);
-            console.log("result: ", result); 
+            // generateCall is a fork of snarkjs cli and modified to get the proof to be sent to the smart-contract 
+            let verifyCall = await generateCall(publicSignals, proof);
+            result = await haalVerifier.verifyProof.call(verifyCall.a, verifyCall.ap, verifyCall.b, verifyCall.bp, verifyCall.c, verifyCall.cp, verifyCall.h, verifyCall.kp, verifyCall.inputs);
+            assert.isTrue(result);
         });
     });
 });
 
 
 describe("Create and test an ethereum stealth wallet", () => {
-    // you need to scan every transaction and look for the following:
-    // 1. does the transaction contain an OP_RETURN?
-    // 2. if yes, then extract the OP_RETURN
-    // 3. is the OP_RETURN data a compressed public key (33 bytes)?
-    // 4. if yes, check if mine
-
-    let compressedPubScanKeys = ''; 
+    
+    let compressedPubScanKeys = '';
     let stealth = {};
     let ethStealthAddress = '';
     let pubKeyToRecover = '';
@@ -79,11 +73,11 @@ describe("Create and test an ethereum stealth wallet", () => {
         // let scanKeyPair = coinkey.createRandom()
         // and use it to fill the stealth object
 
-        stealth = new Stealth({ 
+        stealth = new Stealth({
             payloadPrivKey: new Buffer('3ee7c0e1d4cbd9c1fe34aef5e910b23fffe2d0bd1d7f2dd51f567078100fe3d1', 'hex'),
             payloadPubKey: new Buffer('026fa340f85b9a0c3a0d75898ef25064ec569c57d1e8922ceb67ec08e9907adfb2', 'hex'),
-            scanPrivKey: new Buffer('1ce88522ea4c6927d53799191a6201806d4dce62db69aadd63603cba8d2d8c9f','hex'),
-            scanPubKey: new Buffer('032caa1a564f7f7e17ca5424d4f17495a8568600add7fc1587198d151bddc23e84','hex')
+            scanPrivKey: new Buffer('1ce88522ea4c6927d53799191a6201806d4dce62db69aadd63603cba8d2d8c9f', 'hex'),
+            scanPubKey: new Buffer('032caa1a564f7f7e17ca5424d4f17495a8568600add7fc1587198d151bddc23e84', 'hex')
         });
 
         compressedPubScanKeys = stealth.toString();
@@ -91,24 +85,40 @@ describe("Create and test an ethereum stealth wallet", () => {
 
     });
 
-    it("Vote admin receives the public addr and creates a new wallet", () => {
-        
-        let recoveryFromCompressed = Stealth.fromString(compressedPubScanKeys)
+    it("Vote admin receives compressedPubScanKeys, creates a random wallet and send to smart-contract", async () => {
+
+        let recoveryFromCompressed = Stealth.fromString(compressedPubScanKeys);
 
         // single-use nonce key pair, works with CoinKey, bitcoinjs-lib, bitcore, etc
-        let keypair = coinkey.createRandom()
+        let keypair = coinkey.createRandom();
 
         // generate payment address
         ethStealthAddress = ethereum.addHexPrefix(recoveryFromCompressed.genEthPaymentAddress(keypair.privateKey));
         pubKeyToRecover = keypair.publicKey.toString('hex');
-        opMarker = recoveryFromCompressed.genPaymentPubKeyHash(keypair.privateKey).toString('hex')
+        opMarker = recoveryFromCompressed.genPaymentPubKeyHash(keypair.privateKey).toString('hex');
 
-        // send three outputs to a smart-contrac:
+        let canVote = await haal.ephemeralVoters(ethStealthAddress);
+        assert.isNotTrue(canVote.canVote);
+
+        // send three outputs to a smart-contract:
         // 1. ETH address
         // 1. Regular pubKeyToRecover
         // 2. Marker with `opMarker`
 
+        await haal.enableEphemeralVoter(ethStealthAddress, web3Utils.toHex(pubKeyToRecover), web3Utils.toHex(opMarker))
+        .then( async () => {
+            // Must funding ephemeral wallet to enable voting. Could be made by smart-contract too.
+            let tx = await web3.eth.sendTransaction({ from: allAccounts[0], to: ethStealthAddress, value: web3.utils.toHex('1000000000000000000') });
+            assert.exists(tx.transactionHash);
+        });
         assert.isTrue(ethereum.isValidAddress(ethStealthAddress));
+
+    });
+
+    it("Check if Ephemeral Wallet can vote", async () => {
+
+        let canVote = await haal.ephemeralVoters(ethStealthAddress);
+        assert.isNotTrue(canVote.canVote);
 
     });
 
@@ -120,24 +130,45 @@ describe("Create and test an ethereum stealth wallet", () => {
         let keypair = stealth.checkPaymentPubKeyHash(pubKeyToRecoverBuffer, opMarkerBuffer);
 
         assert.isNotNull(keypair)
-        
+
     });
 
-    it("Voter recovery private key.", () => {
+    it("Voter recovery private key and send a trasaction", async () => {
 
         let opMarkerBuffer = new Buffer(opMarker, 'hex');
         let pubKeyToRecoverBuffer = new Buffer(pubKeyToRecover, 'hex');
 
         let keypair = stealth.checkPaymentPubKeyHash(pubKeyToRecoverBuffer, opMarkerBuffer);
 
-        let PrivateToPublic = ethereum.privateToPublic(keypair.privKey).toString('hex');
+        //let PrivateToPublic = ethereum.privateToPublic(keypair.privKey).toString('hex');
         let ethAddress = '0x' + ethereum.privateToAddress(keypair.privKey).toString('hex');
+
+        // Lets use the recovered private key to access the wallet and prove it can send some funds
+        let privateKey = new Buffer(keypair.privKey, 'hex')
         
-        assert.equal(ethAddress,ethStealthAddress);
+        let rawTx = {
+            nonce: '0x00',
+            from: ethAddress, 
+            to: allAccounts[2],
+            gasPrice: '0x09184e72a000',
+            gasLimit: '0x2710',
+            gas: web3.utils.toHex('50000'),
+            value: web3.utils.toHex('10000000000000000')
+            }
+
+        let unsignedTx = new Tx(rawTx);
+        unsignedTx.sign(privateKey);
+
+        let serializedTx = unsignedTx.serialize();
+        let tx = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
+        //.on('receipt', console.log)
+        
+        assert.exists(tx.transactionHash);
+        assert.equal(ethAddress, ethStealthAddress);
     });
+    
+});
 
-
-})
 
 describe("Create vote and zksnark of vote", () => {
     let votes = {};
@@ -221,7 +252,7 @@ describe("Create vote and zksnark of vote", () => {
 
     it("Create a trusted setup", () => {
         // Trusted setup
-        setup = zkSnark.groth.setup(circuit);
+        setup = zkSnark.original.setup(circuit);
         setup.toxic  // Must be discarded.
         assert.equal(setup.vk_verifier.nPublic, 7);
     }).timeout(10000000);
@@ -235,22 +266,15 @@ describe("Create vote and zksnark of vote", () => {
     it("Generate vote proof", () => {
         const vk_proof = setup.vk_proof
         // Generate the proof
-        proof = zkSnark.groth.genProof(vk_proof, witness);
-        assert.equal(proof.proof.protocol, "groth");
+        proof = zkSnark.original.genProof(vk_proof, witness);
+        assert.equal(proof.proof.protocol, "original");
     });
 
     it("Verify vote proof", () => {
         // Verify the proof
         const vk_verifier = setup.vk_verifier;
-        assert.isTrue(zkSnark.groth.isValid(vk_verifier, proof.proof, proof.publicSignals));
+        assert.isTrue(zkSnark.original.isValid(vk_verifier, proof.proof, proof.publicSignals));
     }).timeout(10000000);
-
-    // it("Verify proof on smartcontract", async () => {
-    //     var verifyCall = generateCall(proof.publicSignals, proof.proof);
-    //     console.log(verifyCall);
-    //     let result = await haalVerifier.verifyProof(verifyCall);
-    //     assert.isTrue(result); 
-    // });
 });
 
 describe("Encrypt, count, decrypt and test votes result proof", () => {

@@ -13,8 +13,8 @@ contract Haal {
     }
     
     struct EphemeralVoter {
-        address ephemeralWallet;
-        bytes32 pubKeyToRecover;
+        address ephemeralAddress;
+        bytes pubKeyToRecover;
         bytes32 opMarker;
         bool canVote;
         bool voted;
@@ -45,9 +45,9 @@ contract Haal {
     mapping(address => Votes) public votes;
     mapping(address => RealVoter) public realVoters;
     
-    EphemeralVoter public ev;
-    RealVoter public rv;
-    Votes public v;
+    // EphemeralVoter public ev;
+    // RealVoter public rv;
+    // Votes public v;
 
     address public owner; // there's no access control implemented on this demo
     address public zkVerifier;
@@ -79,10 +79,11 @@ contract Haal {
         return(true);
     }
     
-    function enableEphemeralVoter(bytes32 _pubKeyToRecover, bytes32 _opMarker) public returns (bool){
+    function enableEphemeralVoter(address _address, bytes _pubKeyToRecover, bytes32 _opMarker) public returns (bool){
         EphemeralVoter storage sender = ephemeralVoters[msg.sender];
         if (sender.voted) return(false);
         
+        sender.ephemeralAddress = _address;
         sender.pubKeyToRecover = _pubKeyToRecover;
         sender.opMarker = _opMarker;
         sender.canVote = true;

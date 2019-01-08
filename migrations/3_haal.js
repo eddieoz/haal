@@ -36,5 +36,5 @@ const Verifier = artifacts.require('./HAAL/verifier.sol');
 module.exports = (deployer) => {
     deployer.deploy(Verifier)
     .then(({ address: verifierAddress }) => deployer
-    .deploy(Haal, "ballot0001", web3Utils.toHex(_publicKey), verifierAddress ));
+    .deploy(Haal, web3Utils.toHex('ballot0001'), web3Utils.toHex(_publicKey), verifierAddress ));
 };

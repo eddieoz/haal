@@ -31,6 +31,7 @@
     "chai": "^4.2.0",
     "coinkey": "^3.0.0",
     "crypto-browserify": "^3.12.0",
+    "ethereumjs-tx": "^1.3.7",
     "ethereumjs-wallet": "^0.6.3",
     "fs": "0.0.1-security",
     "mocha": "^5.2.0",
@@ -38,6 +39,7 @@
     "paillier-in-set-zkp": "git+https://github.com/eddieoz/paillier-in-set-zkp.git",
     "snarkjs": "^0.1.9",
     "stealth_eth": "git+https://github.com/eddieoz/stealth_eth.git",
+    "truffle": "^5.0.1",
     "web3": "^1.0.0-beta.37"
   }
 }
