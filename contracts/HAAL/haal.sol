@@ -1,4 +1,5 @@
 pragma solidity ^0.4.25;
+pragma experimental ABIEncoderV2;
 
 contract Verify { 
     function verifyProof( uint[2], uint[2], uint[2][2], uint[2], uint[2], uint[2], uint[2], uint[2], uint[7]) external pure returns (bool){} 
@@ -6,9 +7,9 @@ contract Verify {
 
 contract Haal {
     struct Votes{
-        uint[] president;
-        uint[] senator;
-        uint[] stateGovernor;
+        bytes[] president;
+        bytes[] senator;
+        bytes[] stateGovernor;
         bytes32 c;
     }
     
@@ -21,6 +22,7 @@ contract Haal {
     }
     
     struct RealVoter {
+        address realVoterAddress;
         uint[2] a;
         uint[2] a_p;
         uint[2][2] b;
@@ -58,14 +60,42 @@ contract Haal {
     uint public votesCount;
     uint public voteProofs;
     
-    constructor(bytes32 _ballotIdentifier, bytes _encryptionPublicKey, address _zkVerifier) public {
+    constructor(
+        bytes32 _ballotIdentifier, 
+        bytes _encryptionPublicKey, 
+        address _zkVerifier
+        ) public {
         owner = msg.sender;
         ballotIdentifier = _ballotIdentifier;
         encryptionPublicKey = _encryptionPublicKey;
         zkVerifier = _zkVerifier;
     }
     
-    function vote(uint256[] memory _president, uint[] memory _senator, uint[] memory _stateGovernor, bytes32 _c) public returns(bool){
+    function addEphemeralVoter(
+        address _address, 
+        bytes _pubKeyToRecover, 
+        bytes32 _opMarker
+        ) public returns(bool){
+        
+        ephemeralVoterArray.length++;
+        ephemeralVoterArray[ephemeralVoterArray.length-1].ephemeralAddress = _address;
+        ephemeralVoterArray[ephemeralVoterArray.length-1].pubKeyToRecover = _pubKeyToRecover;
+        ephemeralVoterArray[ephemeralVoterArray.length-1].opMarker = _opMarker;
+        ephemeralVoterArray[ephemeralVoterArray.length-1].canVote = true;
+        
+        ephemeralVoters[_address] = ephemeralVoterArray.length-1;
+        
+        votersCount+=1;
+        return(true);
+    }
+    
+    function addVote(
+        bytes[] _president, 
+        bytes[] _senator, 
+        bytes[] _stateGovernor,
+        bytes32 _c
+        ) public returns(bool){
+        
         //EphemeralVoter storage sender = ephemeralVoters[msg.sender];
         EphemeralVoter storage sender = ephemeralVoterArray[ephemeralVoters[msg.sender]];
         if (sender.voted || !sender.canVote) return(false);
@@ -85,30 +115,16 @@ contract Haal {
         return(true);
     }
     
-    function enableEphemeralVoter(address _address, bytes _pubKeyToRecover, bytes32 _opMarker) public returns(bool){
-        
-        ephemeralVoterArray.length++;
-        ephemeralVoterArray[ephemeralVoterArray.length-1].ephemeralAddress = _address;
-        ephemeralVoterArray[ephemeralVoterArray.length-1].pubKeyToRecover = _pubKeyToRecover;
-        ephemeralVoterArray[ephemeralVoterArray.length-1].opMarker = _opMarker;
-        ephemeralVoterArray[ephemeralVoterArray.length-1].canVote = true;
-        
-        ephemeralVoters[_address] = ephemeralVoterArray.length-1;
-        
-        votersCount+=1;
-        return(true);
-    }
-    
     function registerVoteProof(
-        uint[2] _a,
-        uint[2] _a_p,
-        uint[2][2] _b,
-        uint[2] _b_p,
-        uint[2] _c,
-        uint[2] _c_p,
-        uint[2] _h,
-        uint[2] _k,
-        uint[7] _input
+        uint[2] memory _a,
+        uint[2] memory _a_p,
+        uint[2][2] memory _b,
+        uint[2] memory _b_p,
+        uint[2] memory _c,
+        uint[2] memory _c_p,
+        uint[2] memory _h,
+        uint[2] memory _k,
+        uint[7] memory _input
         ) public returns (bool){
         
         RealVoter storage sender = realVoterArray[realVoters[msg.sender]];
@@ -119,6 +135,7 @@ contract Haal {
         
         realVoterArray.length++;
         
+        realVoterArray[realVoterArray.length-1].realVoterAddress = msg.sender;
         realVoterArray[realVoterArray.length-1].a = _a;
         realVoterArray[realVoterArray.length-1].a_p = _a_p;
         realVoterArray[realVoterArray.length-1].b = _b;
@@ -136,12 +153,20 @@ contract Haal {
         return(true);
     }
         
-    function countEphemeralWallets() view public returns(uint) {
-        return ephemeralVoterArray.length;
+    function getEphemeralWallets(uint _index) view public returns(address, bytes, bytes32){
+        return(
+            ephemeralVoterArray[_index].ephemeralAddress, 
+            ephemeralVoterArray[_index].pubKeyToRecover, 
+            ephemeralVoterArray[_index].opMarker
+            );
     }
     
-    function getEphemeralWallets(uint _index) view public returns(address, bytes, bytes32){
-        return(ephemeralVoterArray[_index].ephemeralAddress, ephemeralVoterArray[_index].pubKeyToRecover, ephemeralVoterArray[_index].opMarker);
+    function getVotes(uint _index) view public returns(bytes[], bytes[], bytes[]){
+        return(
+            voteArray[_index].president, 
+            voteArray[_index].senator, 
+            voteArray[_index].stateGovernor
+            );
     }
     
 }
