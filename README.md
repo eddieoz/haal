@@ -11,6 +11,7 @@ Hääl means voice in Estonian.
 ## Setup
 `# npm install`
 `run ganache`
+`# yarn truffle migrate --reset`
 `# yarn truffle test`
 
 Apache License
