@@ -10,7 +10,7 @@ const Stealth = require('stealth_eth');
 const ethereum = require('ethereumjs-utils');
 const coinkey = require('coinkey');
 const generateCall = require('../src/generateCall.js');
-const Tx = require('ethereumjs-tx');
+const Tx = require('ethereumjs-tx')
 
 // ### Web3 Connection
 const Web3 = require('web3');
@@ -33,7 +33,7 @@ let opMarker = '';
 let stealth = {};
 
 
-contract('HAALVerifier', (accounts) => {
+contract('HÄÄLVerifier', (accounts) => {
     // Creating a collection of tests that should pass
     describe('Install contracts and test', () => {
         beforeEach(async () => {
@@ -56,7 +56,7 @@ contract('HAALVerifier', (accounts) => {
             allAccounts = accounts;
         });
 
-        it('Test Haal contract', async () => {
+        it('Test Hääl contract', async () => {
             result = await haal.ballotIdentifier().then(function (res) {
                 return (res);
             })
@@ -99,7 +99,7 @@ describe("Create and test an ethereum stealth wallet", () => {
 
     }).timeout(10000000);
 
-    it("Organizer receives compressedPubScanKeys from voter, creates a random ephemeral wallet and send to smart-contract", async () => {
+    it("Organiser receives compressedPubScanKeys from voter, creates a random stealth wallet and send to smart-contract", async () => {
 
         let recoveryFromCompressed = Stealth.fromString(compressedPubScanKeys);
 
@@ -112,7 +112,7 @@ describe("Create and test an ethereum stealth wallet", () => {
         opMarker = recoveryFromCompressed.genPaymentPubKeyHash(keypair.privateKey).toString('hex');
 
         let canVote = await haal.ephemeralVoters(ethStealthAddress);
-        assert.isNotTrue(canVote.canVote);
+        assert.isNotTrue(canVote.canVote); 
 
         // send three outputs to a smart-contract:
         // 1. ETH address
@@ -128,19 +128,20 @@ describe("Create and test an ethereum stealth wallet", () => {
             });
             assert.exists(tx.transactionHash);
         });
-
+        
         assert.isTrue(ethereum.isValidAddress(ethStealthAddress));
 
     });
 
-    it("Organizer checks if ephemeral wallet can vote", async () => {
-
+    it("Organiser checks if stealth wallet can vote", async () => {
+        
         let canVote = await haal.ephemeralVoterArray( await haal.ephemeralVoters(ethStealthAddress) );
+
         assert.isTrue(canVote.canVote);
 
     });
 
-    it("Voter discovers his ephemeral wallet", async () => {
+    it("Voter discovers his stealth wallet", async () => {
         let ew, opMarkerBuffer, pubKeyToRecoverBuffer, keypair;
         let ewCount = await haal.votersCount();
         
@@ -158,13 +159,12 @@ describe("Create and test an ethereum stealth wallet", () => {
 
     });
 
-    it("Voter recovery private key and send a trasaction", async () => {
+    it("Voter recover private key and send a trasaction", async () => {
         let opMarkerBuffer = new Buffer(opMarker, 'hex');
         let pubKeyToRecoverBuffer = new Buffer(pubKeyToRecover, 'hex');
 
         let keypair = stealth.checkPaymentPubKeyHash(pubKeyToRecoverBuffer, opMarkerBuffer);
 
-        //let PrivateToPublic = ethereum.privateToPublic(keypair.privKey).toString('hex');
         let ethAddress = '0x' + ethereum.privateToAddress(keypair.privKey).toString('hex');
 
         // Lets use the recovered private key to access the wallet and prove it can send some funds
@@ -194,9 +194,7 @@ describe("Create and test an ethereum stealth wallet", () => {
     
 });
 
-
-
-describe("Create vote and zksnarks of vote", () => {
+describe("Create vote and zk-snarks of vote", () => {
     let votes = {};
 
     // Setting up the vote
@@ -233,14 +231,13 @@ describe("Create vote and zksnarks of vote", () => {
         }
     }
 
-    // Should create and use sha256 of vote
-    //let votesSha256 = crypto.createHash('sha256').update(JSON.stringify(votes).toString()).digest('hex');
+    // Would create and use sha256 of vote
+    // let votesSha256 = crypto.createHash('sha256').update(JSON.stringify(votes).toString()).digest('hex');
 
     let presidentTotalCandidates = votes.president.length;
     let senatorTotalCandidates = votes.senator.length;
     let stateGovernorTotalCandidades = votes.stateGovernor.length;
 
-    // 
     let p = 1234;
     let rcm = [1234, 13134];
 
@@ -260,7 +257,7 @@ describe("Create vote and zksnarks of vote", () => {
         "senatorTotalVotes": stv,
         "stateGovernorTotalVotes": sgtv,
         "totalVotes": count_votes
-    }.timeout(10000000);
+    }
 
     let circuit = {};
     let setup = {};
@@ -289,14 +286,14 @@ describe("Create vote and zksnarks of vote", () => {
         assert.equal(witness.toString(), "1,1,1,1,3,4,2,4,1,1,1,3,0,0,1,0,1,0,0,0,0,1,858418901399080381986333839137122232297777769967,34077102564424341946805774145332421253459555611827306095970056431371046409817239864580385688030092546598700163424794358633725950204037731083721568214179166939530124130154646,1234,1234,13134,0,1,0,1,0,1,0,0,0");
     });
 
-    it("Generate vote proof", () => {
+    it("Generate proof-of-vote", () => {
         const vk_proof = setup.vk_proof
         // Generate the proof
         proof = zkSnark.original.genProof(vk_proof, witness);
         assert.equal(proof.proof.protocol, "original");
     });
 
-    it("Verify vote proof", () => {
+    it("Verify proof-of-vote", () => {
         // Verify the proof
         const vk_verifier = setup.vk_verifier;
         assert.isTrue(zkSnark.original.isValid(vk_verifier, proof.proof, proof.publicSignals));
@@ -317,13 +314,13 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
     let voteCount = 0;
     let votesArray = [];
 
-    // Randomly creates the Homomorphic Crypto Keys
+    // Optional: Randomly creates the Homomorphic Crypto Keys
     //const { publicKey, privateKey } = paillier.generateRandomKeys(1024);
     let publicKey = ''; 
     let privateKey = '';
 
     it("Encrypt votes", async () => {
-        // Retrieve Homomorphic Encryption Keys generated on Truffle Migrate
+        // Optional: Retrieve Homomorphic Encryption Keys generated on Truffle Migrate
         // const _publicKey = JSON.parse(fs.readFileSync("test/voteenc_publicKey.json", "utf8"));
         // const publicKey = new paillier.PublicKey(bignum(_publicKey.n), bignum(_publicKey.g));
 
@@ -379,7 +376,6 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
 
         let keypair = stealth.checkPaymentPubKeyHash(pubKeyToRecoverBuffer, opMarkerBuffer);
 
-        //let PrivateToPublic = ethereum.privateToPublic(keypair.privKey).toString('hex');
         let ethAddress = '0x' + ethereum.privateToAddress(keypair.privKey).toString('hex');
 
         let canVote = await haal.ephemeralVoterArray( await haal.ephemeralVoters(ethAddress));
@@ -443,8 +439,8 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         let tx = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
 
         canVote = await haal.ephemeralVoterArray( await haal.ephemeralVoters(ethAddress));
-        assert.isNotTrue(canVote.canVote);
-        assert.isTrue(canVote.voted);
+        assert.isNotTrue(canVote.canVote); 
+        assert.isTrue(canVote.voted); 
 
     }).timeout(10000000);
 
@@ -458,8 +454,8 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         // Get total votes
         let votesCount = await haal.votesCount();
 
-        // Retrieve Homomorphic Private Key from local storage
-        const _privateKey = JSON.parse(fs.readFileSync("test/voteenc_privateKey.json", "utf8"));
+        // Retrieve Homomorphic Private Key from local storage        
+        const _privateKey = JSON.parse(fs.readFileSync("test/voteenc_privateKey.json", "utf8")); 
         privateKey = new paillier.PrivateKey(bignum(_privateKey.lambda), bignum(_privateKey.mu), bignum(_privateKey.p), bignum(_privateKey.q), bignum(_privateKey.publicKey));
 
         let encryptedTotalSum = 0
@@ -477,7 +473,6 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
 
             for (let j = 0; j < bVotesArray[0].length; j++) {
                 encryptedTotalSum = publicKey.addition(bignum(web3.utils.hexToAscii(encryptedVotes[i].president[j])), encryptedTotalSum);
-                
                 if(encryptedPresidentSum[j] == null){
                     encryptedPresidentSum[j] = 0;
                     let bn5 = bignum(encryptedPresidentSum[j]).mod(publicKey.n);
@@ -510,12 +505,14 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
             }
         }
         
+        // Decrypt the encrypted sum of votes
         let decryptedTotalSum = privateKey.decrypt(encryptedTotalSum);
-        
+
         let decryptedPresidentSum = [];
         let decryptedSenatorSum = [];
         let decryptedStateGovernorSum = [];
 
+        // Decrypt all the votes
         for (let i = 0; i < encryptedPresidentSum.length; i++) {
             decryptedPresidentSum.push(privateKey.decrypt(encryptedPresidentSum[i])); 
         }
@@ -527,9 +524,10 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         for (let i = 0; i < encryptedStateGovernorSum.length; i++) {
             decryptedStateGovernorSum.push(privateKey.decrypt(encryptedStateGovernorSum[i])); 
         }
+
         assert(decryptedTotalSum.toString() == voteCount.toString());
         assert(decryptedPresidentSum[2].toString() == 1);
-        
+
     });
 
     it("Testing sum on encrypted votes straight from memory", () => {
@@ -562,7 +560,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         assert(decryptedSum.toString() == voteCount.toString());
     });
 
-    it("Create a proof of result, and test result", () => {
+    it("Create a proof-of-result, and test result", () => {
         // Creates a proof of result, encrypting with public key recovered on the smart-contract
         // Public key is used for testing and verifying the result
         // Decrypts using private key recovered from storage
@@ -570,7 +568,9 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         const [encrypted, proof] = encryptWithProof(publicKey, voteCount, [voteCount], publicKey.bitLength)
         const result = verifyProof(publicKey, encrypted, proof, [voteCount], publicKey.bitLength) // true
         let decrypted = privateKey.decrypt(encrypted);
+        
         assert(result == true && decrypted == voteCount);
+
     }).timeout(10000000);
 });
 

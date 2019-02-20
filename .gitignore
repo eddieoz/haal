@@ -2,6 +2,7 @@ build/contracts/*.json
 launch.json
 vote-proof*.json
 myCircuit*
+.vscode
 
 # Logs
 logs
