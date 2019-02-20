@@ -42,9 +42,9 @@ contract('HÄÄLVerifier', (accounts) => {
             // To insert it on the SmartContract
             const publicKey = JSON.parse(fs.readFileSync("test/voteenc_publicKey.json", "utf8"));
             let _publicKey = JSON.stringify({
-                'n': stringifyBigInts(publicKey.n.toString()), 
-                'g':stringifyBigInts(publicKey.g.toString()), 
-                '_n2': stringifyBigInts(publicKey._n2.toString()), 
+                'n': stringifyBigInts(publicKey.n.toString()),
+                'g': stringifyBigInts(publicKey.g.toString()),
+                '_n2': stringifyBigInts(publicKey._n2.toString()),
                 'bitLength': publicKey.bitLength
             });
 
@@ -60,13 +60,13 @@ contract('HÄÄLVerifier', (accounts) => {
             result = await haal.ballotIdentifier().then(function (res) {
                 return (res);
             })
-            assert.equal('0x62616c6c6f743030303100000000000000000000000000000000000000000000', result.toString());            
+            assert.equal('0x62616c6c6f743030303100000000000000000000000000000000000000000000', result.toString());
         });
 
         it("Verify zk vote proof on smartcontract", async () => {
             let proof = JSON.parse(fs.readFileSync("./test/circuit/test_trusted_setup/proof.json", "utf8"));
             let publicSignals = JSON.parse(fs.readFileSync("./test/circuit/test_trusted_setup/public.json", "utf8"));
-            
+
             // generateCall is a fork of snarkjs cli and modified to get the proof to be sent to the smart-contract 
             let verifyCall = await generateCall(publicSignals, proof);
             result = await haalVerifier.verifyProof.call(verifyCall.a, verifyCall.ap, verifyCall.b, verifyCall.bp, verifyCall.c, verifyCall.cp, verifyCall.h, verifyCall.kp, verifyCall.inputs);
@@ -77,9 +77,9 @@ contract('HÄÄLVerifier', (accounts) => {
 
 
 describe("Create and test an ethereum stealth wallet", () => {
-    
+
     let compressedPubScanKeys = '';
-    
+
     it("Voter create scan keys, encode pub+scan public and send to Vote Admin", () => {
 
         // Optionally generate two key pairs, can use CoinKey, bitcoinjs-lib, bitcore, etc
@@ -112,30 +112,30 @@ describe("Create and test an ethereum stealth wallet", () => {
         opMarker = recoveryFromCompressed.genPaymentPubKeyHash(keypair.privateKey).toString('hex');
 
         let canVote = await haal.ephemeralVoters(ethStealthAddress);
-        assert.isNotTrue(canVote.canVote); 
+        assert.isNotTrue(canVote.canVote);
 
         // send three outputs to a smart-contract:
         // 1. ETH address
         // 1. Regular pubKeyToRecover
         // 2. Marker with `opMarker`
         await haal.addEphemeralVoter(ethStealthAddress, web3.utils.toHex(pubKeyToRecover), web3.utils.toHex(opMarker))
-        .then( async () => {
-            // Must funding ephemeral wallet to enable voting. Could be made by smart-contract too.
-            let tx = await web3.eth.sendTransaction({ 
-                from: allAccounts[0], 
-                to: ethStealthAddress, 
-                value: web3.utils.toHex(web3.utils.toWei('1', 'ether')) 
+            .then(async () => {
+                // Must funding ephemeral wallet to enable voting. Could be made by smart-contract too.
+                let tx = await web3.eth.sendTransaction({
+                    from: allAccounts[0],
+                    to: ethStealthAddress,
+                    value: web3.utils.toHex(web3.utils.toWei('1', 'ether'))
+                });
+                assert.exists(tx.transactionHash);
             });
-            assert.exists(tx.transactionHash);
-        });
-        
+
         assert.isTrue(ethereum.isValidAddress(ethStealthAddress));
 
     });
 
     it("Organiser checks if stealth wallet can vote", async () => {
-        
-        let canVote = await haal.ephemeralVoterArray( await haal.ephemeralVoters(ethStealthAddress) );
+
+        let canVote = await haal.ephemeralVoterArray(await haal.ephemeralVoters(ethStealthAddress));
 
         assert.isTrue(canVote.canVote);
 
@@ -144,17 +144,17 @@ describe("Create and test an ethereum stealth wallet", () => {
     it("Voter discovers his stealth wallet", async () => {
         let ew, opMarkerBuffer, pubKeyToRecoverBuffer, keypair;
         let ewCount = await haal.votersCount();
-        
-        for ( var i=0; i<ewCount; i++){    
+
+        for (var i = 0; i < ewCount; i++) {
             ew = await haal.getEphemeralWallets(i);
             pubKeyToRecoverBuffer = new Buffer(web3.utils.hexToAscii(ew[1]), 'hex');
-            opMarkerBuffer = new Buffer(ew[2].slice(2,42), 'hex');
+            opMarkerBuffer = new Buffer(ew[2].slice(2, 42), 'hex');
 
             keypair = stealth.checkPaymentPubKeyHash(pubKeyToRecoverBuffer, opMarkerBuffer);
             if (keypair != null) break;
         }
-        
-        assert.exists(keypair,'privKey');
+
+        assert.exists(keypair, 'privKey');
         assert.isNotNull(keypair);
 
     });
@@ -169,17 +169,17 @@ describe("Create and test an ethereum stealth wallet", () => {
 
         // Lets use the recovered private key to access the wallet and prove it can send some funds
         let privateKey = new Buffer(keypair.privKey, 'hex')
-        
+
         let rawTx = {
             // nonce: web3.utils.toHex(web3.eth.getTransactionCount(ethAddress)),
             nonce: '0x00',
-            from: ethAddress, 
+            from: ethAddress,
             to: allAccounts[2],
             gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
             gasLimit: web3.utils.toHex('10000'),
             gas: web3.utils.toHex('50000'),
             value: web3.utils.toHex(web3.utils.toWei('0.01', 'ether'))
-            }
+        }
 
         let unsignedTx = new Tx(rawTx);
         unsignedTx.sign(privateKey);
@@ -187,11 +187,11 @@ describe("Create and test an ethereum stealth wallet", () => {
         let serializedTx = unsignedTx.serialize();
         let tx = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
         //.on('receipt', console.log)
-        
+
         assert.exists(tx.transactionHash);
         assert.equal(ethAddress, ethStealthAddress);
     });
-    
+
 });
 
 describe("Create vote and zk-snarks of vote", () => {
@@ -316,7 +316,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
 
     // Optional: Randomly creates the Homomorphic Crypto Keys
     //const { publicKey, privateKey } = paillier.generateRandomKeys(1024);
-    let publicKey = ''; 
+    let publicKey = '';
     let privateKey = '';
 
     it("Encrypt votes", async () => {
@@ -365,7 +365,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
     });
 
     it("Register encrypted votes on blockchain through ephemeral wallet", async () => {
-        
+
         // Must reopen conection that was closed (!)
         let web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'));
 
@@ -378,23 +378,23 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
 
         let ethAddress = '0x' + ethereum.privateToAddress(keypair.privKey).toString('hex');
 
-        let canVote = await haal.ephemeralVoterArray( await haal.ephemeralVoters(ethAddress));
+        let canVote = await haal.ephemeralVoterArray(await haal.ephemeralVoters(ethAddress));
         assert.isTrue(canVote.canVote);
 
         // Lets use the recovered private key to access the wallet and prove it can send some funds
         let privateKey = new Buffer(keypair.privKey, 'hex')
 
-        
+
         // Transforming all votes to hex format web3.utils.toHex(votes.president[0].toString())
         // Could be transformed back using bignum(web3.utils.hexToAscii(hexVote))
         // Test: votes.president[0].toString() === web3.utils.toBN(web3.utils.hexToAscii(hexPres)).toString()
         // Result: true
-        
+
         let hexVotes = {};
         hexVotes.president = [];
         hexVotes.senator = [];
         hexVotes.stateGovernor = [];
-        
+
         for (let i = 0; i < votes.president.length; i++) {
             hexVotes.president[i] = web3.utils.toHex(votes.president[i].toString());
         }
@@ -406,24 +406,24 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         for (let k = 0; k < votes.stateGovernor.length; k++) {
             hexVotes.stateGovernor[k] = web3.utils.toHex(votes.stateGovernor[k].toString());
         }
-                
+
         const contract = new web3.eth.Contract(haalABI, haalAddress);
         const method = contract.methods.addVote(hexVotes.president, hexVotes.senator, hexVotes.stateGovernor, web3.utils.toHex('commit1'));
         const encodedABI = method.encodeABI();
-        
+
         // 2 ways for estimating gas
-        const estimateGas1 = await haal.addVote.estimateGas(hexVotes.president, hexVotes.senator, hexVotes.stateGovernor, web3.utils.toHex('commit1'), {from: ethAddress});
+        const estimateGas1 = await haal.addVote.estimateGas(hexVotes.president, hexVotes.senator, hexVotes.stateGovernor, web3.utils.toHex('commit1'), { from: ethAddress });
         const estimateGas2 = await web3.eth.estimateGas({
             from: ethAddress,
-            to: haalAddress, 
+            to: haalAddress,
             data: encodedABI
-         });
-         assert.equal(estimateGas1, estimateGas2);
+        });
+        assert.equal(estimateGas1, estimateGas2);
 
         let rawTx = {
             //nonce: web3.utils.toHex(web3.eth.getTransactionCount(ethAddress)),
             nonce: '0x01',
-            from: ethAddress, 
+            from: ethAddress,
             to: haalAddress,
             gasPrice: web3.utils.toHex(web3.utils.toWei('6', 'gwei')),
             gasLimit: web3.utils.toHex('10000'),
@@ -438,9 +438,9 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
 
         let tx = await web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
 
-        canVote = await haal.ephemeralVoterArray( await haal.ephemeralVoters(ethAddress));
-        assert.isNotTrue(canVote.canVote); 
-        assert.isTrue(canVote.voted); 
+        canVote = await haal.ephemeralVoterArray(await haal.ephemeralVoters(ethAddress));
+        assert.isNotTrue(canVote.canVote);
+        assert.isTrue(canVote.voted);
 
     }).timeout(10000000);
 
@@ -455,7 +455,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         let votesCount = await haal.votesCount();
 
         // Retrieve Homomorphic Private Key from local storage        
-        const _privateKey = JSON.parse(fs.readFileSync("test/voteenc_privateKey.json", "utf8")); 
+        const _privateKey = JSON.parse(fs.readFileSync("test/voteenc_privateKey.json", "utf8"));
         privateKey = new paillier.PrivateKey(bignum(_privateKey.lambda), bignum(_privateKey.mu), bignum(_privateKey.p), bignum(_privateKey.q), bignum(_privateKey.publicKey));
 
         let encryptedTotalSum = 0
@@ -464,16 +464,16 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         while (bn5.lt(0)) bn5 = bn5.add(publicKey.n);
         encryptedTotalSum = publicKey.encrypt(encryptedTotalSum);
 
-        for ( var i=0; i<votesCount; i++){
+        for (var i = 0; i < votesCount; i++) {
             bVotesArray = await haal.getVotes(i);
             encryptedVotes[i].president = bVotesArray[0];
             encryptedVotes[i].senator = bVotesArray[1];
             encryptedVotes[i].stateGovernor = bVotesArray[2];
-            
+
 
             for (let j = 0; j < bVotesArray[0].length; j++) {
                 encryptedTotalSum = publicKey.addition(bignum(web3.utils.hexToAscii(encryptedVotes[i].president[j])), encryptedTotalSum);
-                if(encryptedPresidentSum[j] == null){
+                if (encryptedPresidentSum[j] == null) {
                     encryptedPresidentSum[j] = 0;
                     let bn5 = bignum(encryptedPresidentSum[j]).mod(publicKey.n);
                     while (bn5.lt(0)) bn5 = bn5.add(publicKey.n);
@@ -483,7 +483,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
             }
 
             for (let k = 0; k < bVotesArray[1].length; k++) {
-                if(encryptedSenatorSum[k] == null){
+                if (encryptedSenatorSum[k] == null) {
                     encryptedSenatorSum[k] = 0;
                     let bn5 = bignum(encryptedSenatorSum[k]).mod(publicKey.n);
                     while (bn5.lt(0)) bn5 = bn5.add(publicKey.n);
@@ -494,7 +494,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
             }
 
             for (let l = 0; l < bVotesArray[2].length; l++) {
-                if(encryptedStateGovernorSum[l] == null){
+                if (encryptedStateGovernorSum[l] == null) {
                     encryptedStateGovernorSum[l] = 0;
                     let bn5 = bignum(encryptedStateGovernorSum[l]).mod(publicKey.n);
                     while (bn5.lt(0)) bn5 = bn5.add(publicKey.n);
@@ -504,7 +504,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
                 encryptedStateGovernorSum[l] = publicKey.addition(bignum(web3.utils.hexToAscii(encryptedVotes[i].stateGovernor[l])), encryptedStateGovernorSum[l]);
             }
         }
-        
+
         // Decrypt the encrypted sum of votes
         let decryptedTotalSum = privateKey.decrypt(encryptedTotalSum);
 
@@ -514,15 +514,15 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
 
         // Decrypt all the votes
         for (let i = 0; i < encryptedPresidentSum.length; i++) {
-            decryptedPresidentSum.push(privateKey.decrypt(encryptedPresidentSum[i])); 
+            decryptedPresidentSum.push(privateKey.decrypt(encryptedPresidentSum[i]));
         }
 
         for (let i = 0; i < encryptedSenatorSum.length; i++) {
-            decryptedSenatorSum.push(privateKey.decrypt(encryptedSenatorSum[i])); 
+            decryptedSenatorSum.push(privateKey.decrypt(encryptedSenatorSum[i]));
         }
 
         for (let i = 0; i < encryptedStateGovernorSum.length; i++) {
-            decryptedStateGovernorSum.push(privateKey.decrypt(encryptedStateGovernorSum[i])); 
+            decryptedStateGovernorSum.push(privateKey.decrypt(encryptedStateGovernorSum[i]));
         }
 
         assert(decryptedTotalSum.toString() == voteCount.toString());
@@ -531,7 +531,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
     });
 
     it("Testing sum on encrypted votes straight from memory", () => {
-        
+
         // Retrieve Homomorphic Private Key from local storage
         const _privateKey = JSON.parse(fs.readFileSync("test/voteenc_privateKey.json", "utf8"));
         privateKey = new paillier.PrivateKey(bignum(_privateKey.lambda), bignum(_privateKey.mu), bignum(_privateKey.p), bignum(_privateKey.q), bignum(_privateKey.publicKey));
@@ -568,7 +568,7 @@ describe("Encrypt, count, decrypt and test votes result proof", () => {
         const [encrypted, proof] = encryptWithProof(publicKey, voteCount, [voteCount], publicKey.bitLength)
         const result = verifyProof(publicKey, encrypted, proof, [voteCount], publicKey.bitLength) // true
         let decrypted = privateKey.decrypt(encrypted);
-        
+
         assert(result == true && decrypted == voteCount);
 
     }).timeout(10000000);
