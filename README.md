@@ -1,4 +1,5 @@
-# Hääl - Anonymous Electronic Voting System on Public Blockchains 
+# Hääl
+# Anonymous Electronic Voting System on Public Blockchains 
 
 Hääl means voice in Estonian.
 
@@ -9,15 +10,21 @@ Hääl means voice in Estonian.
 - Yarn ^1.13.0 (optional)
 
 ## Setup
-`# npm install`
-`run ganache`
-`# node ./node_modules/truffle/build/cli.bundled.js migrate --reset`
+```
+# npm install
+run ganache
+# node ./node_modules/truffle/build/cli.bundled.js migrate --reset
+```
 
 ## Run
-`# node ./node_modules/truffle/build/cli.bundled.js test`
+```
+# node ./node_modules/truffle/build/cli.bundled.js test
+```
 
 optionally, you can build and run with yarn
-`# yarn truffle migrate --reset`
-`# yarn truffle test`
+```
+# yarn truffle migrate --reset
+# yarn truffle test
+```
 
 Apache License
