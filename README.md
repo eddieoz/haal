@@ -9,8 +9,8 @@ It describes a full process for an e-voting system, using public blockchains and
 The full protocol makes use of:
 - Zero-knowledge proofs (with zk-snarks verified on-chain)
 - Homomorphic encryption (Paillier protocol + zk)
-- Stealth addresses
-- Encrypted notes (e.g AZTEC, Zcash)
+- Stealth addresses (as proposed by Peter Todd, but ported to ethereum)
+- Encrypted notes (e.g Zcash, AZTEC)
 - Criptography challenges (based on Sigma protocol)
 - Digital signatures
 - Ethereum (or another blockchain capable of running dApps)
