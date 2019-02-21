@@ -8,7 +8,7 @@ It describes a full process for an e-voting system, using public blockchains and
 
 The full protocol makes use of:
 - Zero-knowledge proofs (with zk-snarks verified on-chain)
-- Homomorphic encryption (Paillier)
+- Homomorphic encryption (Paillier protocol + zk)
 - Stealth addresses
 - Encrypted notes (e.g AZTEC, Zcash)
 - Criptography challenges (based on Sigma protocol)
