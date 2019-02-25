@@ -11,7 +11,7 @@ The full protocol makes use of:
 - Homomorphic encryption (Paillier protocol + zk)
 - Stealth addresses (as proposed by Peter Todd, but ported to ethereum)
 - Encrypted notes (e.g Zcash, AZTEC)
-- Criptography challenges (based on Sigma protocol)
+- Cryptography challenges (based on Sigma protocol)
 - Digital signatures
 - Ethereum (or another blockchain capable of running dApps)
 - other technologies described on the whitepaper
