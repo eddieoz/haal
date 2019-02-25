@@ -29,7 +29,7 @@ All contributions are welcome.
 ```
 # yarn install
 # yarn truffle build
-Run ganache (or ganache-cli)
+# yarn ganache-cli
 ```
 
 ## Run
