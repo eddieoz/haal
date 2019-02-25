@@ -27,9 +27,7 @@ All contributions are welcome.
 
 ## Setup
 ```
-# yarn install
-# yarn truffle build
-# yarn ganache-cli
+# yarn install && yarn truffle build && yarn ganache-cli
 ```
 
 ## Run
