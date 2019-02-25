@@ -34,6 +34,7 @@ All contributions are welcome.
 
 ## Run
 ```
+(on a new terminal)
 # yarn truffle test
 ```
 
