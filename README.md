@@ -52,17 +52,19 @@ pragma experimental ABIEncoderV2;
 ^-------------------------------^
 ```
 
-That message appears because we're using an experimental method to fill arrays:
+That message appears because we're using an experimental method to fill arrays (`bytes[]`):
 ```
 function addVote(
         bytes[] _president, 
         bytes[] _senator, 
         bytes[] _stateGovernor,
+        ^-----^
 [...]
 ```
 and
 ```
 function getVotes(uint _index) view public returns(bytes[], bytes[], bytes[])
+                                                   ^-----------------------^
 ```
 
 Apache License
