@@ -23,25 +23,29 @@ All contributions are welcome.
 - Ganache ^1.2.2
 - Node ^8
 - Solidity ^0.4.5
-- Yarn ^1.13.0 (optional)
+- Yarn ^1.13.0
 
 ## Setup
 ```
-# npm install
-# node ./node_modules/truffle/build/cli.bundled.js build
-Run ganache
+# yarn install -s
+# yarn truffle build
+Run ganache (or ganache-cli)
 ```
 
 ## Run
 ```
+# yarn truffle test
+```
+
+---
+optionally, you can build and run with npm and node
+```
+# npm install -Wno-cast-function-type 2> debug.log
+# node ./node_modules/truffle/build/cli.bundled.js build
+Run ganache (or ganache-cli)
 # node ./node_modules/truffle/build/cli.bundled.js test
 ```
 
-optionally, you can build and run with yarn
-```
-# yarn truffle build
-# yarn truffle test
-```
 
 ### Compile warnings
 

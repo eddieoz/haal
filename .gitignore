@@ -3,6 +3,7 @@ launch.json
 vote-proof1-*.json
 myCircuit*
 .vscode
+package-lock.json
 
 # Logs
 logs
