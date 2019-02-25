@@ -1,6 +1,6 @@
 build/contracts/*.json
 launch.json
-vote-proof*.json
+vote-proof1-*.json
 myCircuit*
 .vscode
 
