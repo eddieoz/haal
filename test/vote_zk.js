@@ -12,6 +12,17 @@ const coinkey = require('coinkey');
 const generateCall = require('../src/generateCall.js');
 const Tx = require('ethereumjs-tx')
 
+// Workaround to solve paillier-js bigInt.rand not found when running with yarn
+let bigInt = bignum;
+bigInt.rand = function (bitLength) {
+    let bytes = bitLength / 8;
+    let buf = Buffer.alloc(bytes);
+    crypto.randomFillSync(buf);
+    buf[0] = buf[0] | 128;  // first bit to 1 -> to get the necessary bitLength
+    return bigInt.fromArray([...buf], 256);
+};
+
+
 // ### Web3 Connection
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'));
