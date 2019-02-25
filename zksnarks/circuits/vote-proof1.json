@@ -1,0 +1,473 @@
+{
+ "mainCode": "{\n    {\n        {\n            {\n                {\n                }\n            }\n        }\n        {\n        }\n    }\n}\n",
+ "signalName2Idx": {
+  "one": 0,
+  "main.presidentTotalCandidates": 5,
+  "main.senatorTotalCandidates": 6,
+  "main.stateGovernorTotalCandidates": 7,
+  "main.presidentTotalVotes": 8,
+  "main.senatorTotalVotes": 9,
+  "main.stateGovernorTotalVotes": 10,
+  "main.totalVotes": 11,
+  "main.president[0]": 12,
+  "main.president[1]": 13,
+  "main.president[2]": 14,
+  "main.president[3]": 15,
+  "main.senator[0]": 16,
+  "main.senator[1]": 17,
+  "main.stateGovernor[0]": 18,
+  "main.stateGovernor[1]": 19,
+  "main.stateGovernor[2]": 20,
+  "main.stateGovernor[3]": 21,
+  "main.voter": 22,
+  "main.signature": 23,
+  "main.p": 24,
+  "main.rcm[0]": 25,
+  "main.rcm[1]": 26,
+  "main.outPresidentTotalVotes": 1,
+  "main.outSenatorTotalVotes": 2,
+  "main.outStateGovernorTotalVotes": 3,
+  "main.outTotalVotes": 4,
+  "main.iszA.in": 27,
+  "main.iszA.out": 28,
+  "main.iszA.inv": 29,
+  "main.iszB.in": 35,
+  "main.iszB.out": 30,
+  "main.iszB.inv": 31,
+  "main.isequal.in[0]": 28,
+  "main.isequal.in[1]": 30,
+  "main.isequal.out": 32,
+  "main.isequal.isz.in": 33,
+  "main.isequal.isz.out": 32,
+  "main.isequal.isz.inv": 34
+ },
+ "components": [
+  {
+   "name": "main",
+   "params": {
+    "pc": "4",
+    "sc": "2",
+    "sgc": "4"
+   },
+   "template": "ValidateVotes",
+   "inputSignals": 22
+  },
+  {
+   "name": "main.iszA",
+   "params": {},
+   "template": "IsZero",
+   "inputSignals": 1
+  },
+  {
+   "name": "main.iszB",
+   "params": {},
+   "template": "IsZero",
+   "inputSignals": 1
+  },
+  {
+   "name": "main.isequal",
+   "params": {},
+   "template": "IsEqual",
+   "inputSignals": 2
+  },
+  {
+   "name": "main.isequal.isz",
+   "params": {},
+   "template": "IsZero",
+   "inputSignals": 1
+  }
+ ],
+ "componentName2Idx": {
+  "main": 0,
+  "main.iszA": 1,
+  "main.iszB": 2,
+  "main.isequal": 3,
+  "main.isequal.isz": 4
+ },
+ "signals": [
+  {
+   "names": [
+    "one"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.outPresidentTotalVotes"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.outSenatorTotalVotes"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.outStateGovernorTotalVotes"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.outTotalVotes"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.presidentTotalCandidates"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.senatorTotalCandidates"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.stateGovernorTotalCandidates"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.presidentTotalVotes"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.senatorTotalVotes"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.stateGovernorTotalVotes"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.totalVotes"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.president[0]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.president[1]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.president[2]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.president[3]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.senator[0]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.senator[1]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.stateGovernor[0]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.stateGovernor[1]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.stateGovernor[2]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.stateGovernor[3]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.voter"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.signature"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.p"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.rcm[0]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.rcm[1]"
+   ],
+   "triggerComponents": [
+    0
+   ]
+  },
+  {
+   "names": [
+    "main.iszA.in"
+   ],
+   "triggerComponents": [
+    1
+   ]
+  },
+  {
+   "names": [
+    "main.iszA.out",
+    "main.isequal.in[0]"
+   ],
+   "triggerComponents": [
+    3
+   ]
+  },
+  {
+   "names": [
+    "main.iszA.inv"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.iszB.out",
+    "main.isequal.in[1]"
+   ],
+   "triggerComponents": [
+    3
+   ]
+  },
+  {
+   "names": [
+    "main.iszB.inv"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.isequal.out",
+    "main.isequal.isz.out"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.isequal.isz.in"
+   ],
+   "triggerComponents": [
+    4
+   ]
+  },
+  {
+   "names": [
+    "main.isequal.isz.inv"
+   ],
+   "triggerComponents": []
+  },
+  {
+   "names": [
+    "main.iszB.in"
+   ],
+   "triggerComponents": [
+    2
+   ]
+  }
+ ],
+ "constraints": [
+  [
+   {},
+   {},
+   {
+    "0": "1",
+    "8": "21888242871839275222246405745257275088548364400416034343698204186575808495616"
+   }
+  ],
+  [
+   {},
+   {},
+   {
+    "0": "1",
+    "9": "21888242871839275222246405745257275088548364400416034343698204186575808495616"
+   }
+  ],
+  [
+   {},
+   {},
+   {
+    "0": "1",
+    "10": "21888242871839275222246405745257275088548364400416034343698204186575808495616"
+   }
+  ],
+  [
+   {},
+   {},
+   {
+    "8": "1",
+    "9": "1",
+    "10": "1",
+    "11": "21888242871839275222246405745257275088548364400416034343698204186575808495616"
+   }
+  ],
+  [
+   {
+    "8": "21888242871839275222246405745257275088548364400416034343698204186575808495616",
+    "9": "21888242871839275222246405745257275088548364400416034343698204186575808495616",
+    "10": "21888242871839275222246405745257275088548364400416034343698204186575808495616",
+    "11": "1"
+   },
+   {
+    "29": "1"
+   },
+   {}
+  ],
+  [
+   {},
+   {},
+   {
+    "8": "1",
+    "9": "1",
+    "10": "1",
+    "11": "21888242871839275222246405745257275088548364400416034343698204186575808495616"
+   }
+  ],
+  [
+   {},
+   {},
+   {
+    "0": "21888242871839275222246405745257275088548364400416034343698204186575808495613",
+    "5": "1"
+   }
+  ],
+  [
+   {},
+   {},
+   {
+    "0": "21888242871839275222246405745257275088548364400416034343698204186575808495615",
+    "6": "1"
+   }
+  ],
+  [
+   {},
+   {},
+   {
+    "0": "21888242871839275222246405745257275088548364400416034343698204186575808495613",
+    "7": "1"
+   }
+  ]
+ ],
+ "templates": {
+  "CompConstant": "function(ctx) {\n    ctx.setVar(\"sum\", [], \"0\");\n    ctx.setVar(\"b\", [], \"340282366920938463463374607431768211455\");\n    ctx.setVar(\"a\", [], \"1\");\n    ctx.setVar(\"e\", [], \"1\");\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(\"127\")) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setVar(\"clsb\", [], bigInt(bigInt(bigInt(ctx.getVar(\"i\",[])).mul(bigInt(\"2\")).mod(__P__)).greater(bigInt(256)) ? 0 : bigInt(ctx.getVar(\"ct\",[])).shr(bigInt(bigInt(ctx.getVar(\"i\",[])).mul(bigInt(\"2\")).mod(__P__))).and(__MASK__)).and(bigInt(\"1\")).and(__MASK__));\n        ctx.setVar(\"cmsb\", [], bigInt(bigInt(bigInt(bigInt(ctx.getVar(\"i\",[])).mul(bigInt(\"2\")).mod(__P__)).add(bigInt(\"1\")).mod(__P__)).greater(bigInt(256)) ? 0 : bigInt(ctx.getVar(\"ct\",[])).shr(bigInt(bigInt(bigInt(ctx.getVar(\"i\",[])).mul(bigInt(\"2\")).mod(__P__)).add(bigInt(\"1\")).mod(__P__))).and(__MASK__)).and(bigInt(\"1\")).and(__MASK__));\n        ctx.setVar(\"slsb\", [], ctx.getSignal(\"in\", [bigInt(ctx.getVar(\"i\",[])).mul(bigInt(\"2\")).mod(__P__)]));\n        ctx.setVar(\"smsb\", [], ctx.getSignal(\"in\", [bigInt(bigInt(ctx.getVar(\"i\",[])).mul(bigInt(\"2\")).mod(__P__)).add(bigInt(\"1\")).mod(__P__)]));\n        if (bigInt((bigInt(ctx.getVar(\"cmsb\",[])).eq(bigInt(\"0\")) ? 1 : 0)).and(bigInt((bigInt(ctx.getVar(\"clsb\",[])).eq(bigInt(\"0\")) ? 1 : 0))).and(__MASK__)) {\n        {\n            ctx.setSignal(\"parts\", [ctx.getVar(\"i\",[])], bigInt(bigInt(bigInt(bigInt(__P__.sub(bigInt(ctx.getVar(\"b\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__))).mod(__P__));\n            ctx.assert(ctx.getSignal(\"parts\", [ctx.getVar(\"i\",[])]), bigInt(bigInt(bigInt(bigInt(__P__.sub(bigInt(ctx.getVar(\"b\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__))).mod(__P__));\n        }\n\n        } else {\n        if (bigInt((bigInt(ctx.getVar(\"cmsb\",[])).eq(bigInt(\"0\")) ? 1 : 0)).and(bigInt((bigInt(ctx.getVar(\"clsb\",[])).eq(bigInt(\"1\")) ? 1 : 0))).and(__MASK__)) {\n        {\n            ctx.setSignal(\"parts\", [ctx.getVar(\"i\",[])], bigInt(bigInt(bigInt(bigInt(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(__P__).sub(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(__P__).sub(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(ctx.getVar(\"a\",[]))).mod(__P__));\n            ctx.assert(ctx.getSignal(\"parts\", [ctx.getVar(\"i\",[])]), bigInt(bigInt(bigInt(bigInt(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(__P__).sub(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(__P__).sub(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(ctx.getVar(\"a\",[]))).mod(__P__));\n        }\n\n        } else {\n        if (bigInt((bigInt(ctx.getVar(\"cmsb\",[])).eq(bigInt(\"1\")) ? 1 : 0)).and(bigInt((bigInt(ctx.getVar(\"clsb\",[])).eq(bigInt(\"0\")) ? 1 : 0))).and(__MASK__)) {\n        {\n            ctx.setSignal(\"parts\", [ctx.getVar(\"i\",[])], bigInt(bigInt(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(__P__).sub(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(ctx.getVar(\"a\",[]))).mod(__P__));\n            ctx.assert(ctx.getSignal(\"parts\", [ctx.getVar(\"i\",[])]), bigInt(bigInt(bigInt(bigInt(ctx.getVar(\"b\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(__P__).sub(bigInt(bigInt(ctx.getVar(\"a\",[])).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__))).mod(__P__)).add(bigInt(ctx.getVar(\"a\",[]))).mod(__P__));\n        }\n\n        } else {\n        {\n            ctx.setSignal(\"parts\", [ctx.getVar(\"i\",[])], bigInt(bigInt(bigInt(__P__.sub(bigInt(ctx.getVar(\"a\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(bigInt(ctx.getVar(\"a\",[]))).mod(__P__));\n            ctx.assert(ctx.getSignal(\"parts\", [ctx.getVar(\"i\",[])]), bigInt(bigInt(bigInt(__P__.sub(bigInt(ctx.getVar(\"a\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"smsb\",[]))).mod(__P__)).mul(bigInt(ctx.getVar(\"slsb\",[]))).mod(__P__)).add(bigInt(ctx.getVar(\"a\",[]))).mod(__P__));\n        }\n\n        }\n\n        }\n\n        }\n        ctx.setVar(\"sum\", [], bigInt(ctx.getVar(\"sum\",[])).add(bigInt(ctx.getSignal(\"parts\", [ctx.getVar(\"i\",[])]))).mod(__P__));\n        ctx.setVar(\"b\", [], bigInt(ctx.getVar(\"b\",[])).add(__P__).sub(bigInt(ctx.getVar(\"e\",[]))).mod(__P__));\n        ctx.setVar(\"a\", [], bigInt(ctx.getVar(\"a\",[])).add(bigInt(ctx.getVar(\"e\",[]))).mod(__P__));\n        ctx.setVar(\"e\", [], bigInt(ctx.getVar(\"e\",[])).mul(bigInt(\"2\")).mod(__P__));\n    }\n\n     }\n    ctx.setSignal(\"sout\", [], ctx.getVar(\"sum\",[]));\n    ctx.assert(ctx.getSignal(\"sout\", []), ctx.getVar(\"sum\",[]));\n    ctx.setPin(\"num2bits\", [], \"in\", [], ctx.getSignal(\"sout\", []));\n    ctx.assert(ctx.getPin(\"num2bits\", [], \"in\", []), ctx.getSignal(\"sout\", []));\n    ctx.setSignal(\"out\", [], ctx.getPin(\"num2bits\", [], \"out\", [\"127\"]));\n    ctx.assert(ctx.getSignal(\"out\", []), ctx.getPin(\"num2bits\", [], \"out\", [\"127\"]));\n}\n",
+  "AliasCheck": "function(ctx) {\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(\"254\")) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    ctx.setPin(\"compConstant\", [], \"in\", [ctx.getVar(\"i\",[])], ctx.getSignal(\"in\", [ctx.getVar(\"i\",[])]));\n    ctx.assert(ctx.getPin(\"compConstant\", [], \"in\", [ctx.getVar(\"i\",[])]), ctx.getSignal(\"in\", [ctx.getVar(\"i\",[])]))\n     }\n    ctx.assert(ctx.getPin(\"compConstant\", [], \"out\", []), \"0\");\n}\n",
+  "Num2Bits": "function(ctx) {\n    ctx.setVar(\"lc1\", [], \"0\");\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(ctx.getVar(\"n\",[]))) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setSignal(\"out\", [ctx.getVar(\"i\",[])], bigInt(bigInt(ctx.getVar(\"i\",[])).greater(bigInt(256)) ? 0 : bigInt(ctx.getSignal(\"in\", [])).shr(bigInt(ctx.getVar(\"i\",[]))).and(__MASK__)).and(bigInt(\"1\")).and(__MASK__));\n        ctx.assert(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"i\",[])])).mul(bigInt(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"i\",[])])).add(__P__).sub(bigInt(\"1\")).mod(__P__))).mod(__P__), \"0\");\n        ctx.setVar(\"lc1\", [], bigInt(ctx.getVar(\"lc1\",[])).add(bigInt(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"i\",[])])).mul(bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"i\",[])), __P__))).mod(__P__))).mod(__P__));\n    }\n\n     }\n    ctx.assert(ctx.getVar(\"lc1\",[]), ctx.getSignal(\"in\", []));\n}\n",
+  "Num2Bits_strict": "function(ctx) {\n    ctx.setPin(\"n2b\", [], \"in\", [], ctx.getSignal(\"in\", []));\n    ctx.assert(ctx.getPin(\"n2b\", [], \"in\", []), ctx.getSignal(\"in\", []));\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(\"254\")) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setSignal(\"out\", [ctx.getVar(\"i\",[])], ctx.getPin(\"n2b\", [], \"out\", [ctx.getVar(\"i\",[])]));\n        ctx.assert(ctx.getSignal(\"out\", [ctx.getVar(\"i\",[])]), ctx.getPin(\"n2b\", [], \"out\", [ctx.getVar(\"i\",[])]));\n        ctx.setPin(\"aliasCheck\", [], \"in\", [ctx.getVar(\"i\",[])], ctx.getPin(\"n2b\", [], \"out\", [ctx.getVar(\"i\",[])]));\n        ctx.assert(ctx.getPin(\"aliasCheck\", [], \"in\", [ctx.getVar(\"i\",[])]), ctx.getPin(\"n2b\", [], \"out\", [ctx.getVar(\"i\",[])]));\n    }\n\n     }\n}\n",
+  "Bits2Num": "function(ctx) {\n    ctx.setVar(\"lc1\", [], \"0\");\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(ctx.getVar(\"n\",[]))) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setVar(\"lc1\", [], bigInt(ctx.getVar(\"lc1\",[])).add(bigInt(bigInt(ctx.getSignal(\"in\", [ctx.getVar(\"i\",[])])).mul(bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"i\",[])), __P__))).mod(__P__))).mod(__P__));\n    }\n\n     }\n    ctx.setSignal(\"out\", [], ctx.getVar(\"lc1\",[]));\n    ctx.assert(ctx.getSignal(\"out\", []), ctx.getVar(\"lc1\",[]));\n}\n",
+  "Bits2Num_strict": "function(ctx) {\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(\"254\")) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setPin(\"b2n\", [], \"in\", [ctx.getVar(\"i\",[])], ctx.getSignal(\"in\", [ctx.getVar(\"i\",[])]));\n        ctx.assert(ctx.getPin(\"b2n\", [], \"in\", [ctx.getVar(\"i\",[])]), ctx.getSignal(\"in\", [ctx.getVar(\"i\",[])]));\n        ctx.setPin(\"aliasCheck\", [], \"in\", [ctx.getVar(\"i\",[])], ctx.getSignal(\"in\", [ctx.getVar(\"i\",[])]));\n        ctx.assert(ctx.getPin(\"aliasCheck\", [], \"in\", [ctx.getVar(\"i\",[])]), ctx.getSignal(\"in\", [ctx.getVar(\"i\",[])]));\n    }\n\n     }\n    ctx.setSignal(\"out\", [], ctx.getPin(\"b2n\", [], \"out\", []));\n    ctx.assert(ctx.getSignal(\"out\", []), ctx.getPin(\"b2n\", [], \"out\", []));\n}\n",
+  "Num2BitsNeg": "function(ctx) {\n    ctx.setVar(\"lc1\", [], \"0\");\n    ctx.setVar(\"neg\", [], bigInt((bigInt(ctx.getVar(\"n\",[])).eq(bigInt(\"0\")) ? 1 : 0)).neq(bigInt(0)) ? (\"0\") : (bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"n\",[])), __P__)).add(__P__).sub(bigInt(ctx.getSignal(\"in\", []))).mod(__P__)));\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(ctx.getVar(\"n\",[]))) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setSignal(\"out\", [ctx.getVar(\"i\",[])], bigInt(bigInt(ctx.getVar(\"i\",[])).greater(bigInt(256)) ? 0 : bigInt(ctx.getVar(\"neg\",[])).shr(bigInt(ctx.getVar(\"i\",[]))).and(__MASK__)).and(bigInt(\"1\")).and(__MASK__));\n        ctx.assert(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"i\",[])])).mul(bigInt(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"i\",[])])).add(__P__).sub(bigInt(\"1\")).mod(__P__))).mod(__P__), \"0\");\n        ctx.setVar(\"lc1\", [], bigInt(ctx.getVar(\"lc1\",[])).add(bigInt(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"i\",[])])).mul(bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"i\",[])), __P__))).mod(__P__))).mod(__P__));\n    }\n\n     }\n    ctx.setPin(\"isZero\", [], \"in\", [], ctx.getSignal(\"in\", []));\n    ctx.assert(ctx.getPin(\"isZero\", [], \"in\", []), ctx.getSignal(\"in\", []));\n    ctx.assert(bigInt(ctx.getVar(\"lc1\",[])).add(bigInt(bigInt(ctx.getPin(\"isZero\", [], \"out\", [])).mul(bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"n\",[])), __P__))).mod(__P__))).mod(__P__), bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"n\",[])), __P__)).add(__P__).sub(bigInt(ctx.getSignal(\"in\", []))).mod(__P__));\n}\n",
+  "BinSum": "function(ctx) {\n    ctx.setVar(\"nout\", [], ctx.callFunction(\"nbits\", [bigInt(bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"n\",[])), __P__)).add(__P__).sub(bigInt(\"1\")).mod(__P__)).mul(bigInt(ctx.getVar(\"ops\",[]))).mod(__P__)]));\n    ctx.setVar(\"lin\", [], \"0\");\n    ctx.setVar(\"lout\", [], \"0\");\n    for (ctx.setVar(\"k\", [], \"0\");bigInt(ctx.getVar(\"k\",[])).lt(bigInt(ctx.getVar(\"n\",[]))) ? 1 : 0;(ctx.setVar(\"k\", [], bigInt(ctx.getVar(\"k\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        for (ctx.setVar(\"j\", [], \"0\");bigInt(ctx.getVar(\"j\",[])).lt(bigInt(ctx.getVar(\"ops\",[]))) ? 1 : 0;(ctx.setVar(\"j\", [], bigInt(ctx.getVar(\"j\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n        {\n            ctx.setVar(\"lin\", [], bigInt(ctx.getVar(\"lin\",[])).add(bigInt(bigInt(ctx.getSignal(\"in\", [ctx.getVar(\"j\",[]),ctx.getVar(\"k\",[])])).mul(bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"k\",[])), __P__))).mod(__P__))).mod(__P__));\n        }\n\n         }\n    }\n\n     }\n    for (ctx.setVar(\"k\", [], \"0\");bigInt(ctx.getVar(\"k\",[])).lt(bigInt(ctx.getVar(\"nout\",[]))) ? 1 : 0;(ctx.setVar(\"k\", [], bigInt(ctx.getVar(\"k\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setSignal(\"out\", [ctx.getVar(\"k\",[])], bigInt(bigInt(ctx.getVar(\"k\",[])).greater(bigInt(256)) ? 0 : bigInt(ctx.getVar(\"lin\",[])).shr(bigInt(ctx.getVar(\"k\",[]))).and(__MASK__)).and(bigInt(\"1\")).and(__MASK__));\n        ctx.assert(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"k\",[])])).mul(bigInt(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"k\",[])])).add(__P__).sub(bigInt(\"1\")).mod(__P__))).mod(__P__), \"0\");\n        ctx.setVar(\"lout\", [], bigInt(ctx.getVar(\"lout\",[])).add(bigInt(bigInt(ctx.getSignal(\"out\", [ctx.getVar(\"k\",[])])).mul(bigInt(bigInt(\"2\").modPow(bigInt(ctx.getVar(\"k\",[])), __P__))).mod(__P__))).mod(__P__));\n    }\n\n     }\n    ctx.assert(ctx.getVar(\"lin\",[]), ctx.getVar(\"lout\",[]));\n}\n",
+  "IsZero": "function(ctx) {\n    ctx.setSignal(\"inv\", [], bigInt((bigInt(ctx.getSignal(\"in\", [])).eq(bigInt(\"0\")) ? 0 : 1)).neq(bigInt(0)) ? (bigInt(\"1\").mul( bigInt(ctx.getSignal(\"in\", [])).inverse(__P__) ).mod(__P__)) : (\"0\"));\n    ctx.setSignal(\"out\", [], bigInt(bigInt(__P__.sub(bigInt(ctx.getSignal(\"in\", []))).mod(__P__)).mul(bigInt(ctx.getSignal(\"inv\", []))).mod(__P__)).add(bigInt(\"1\")).mod(__P__));\n    ctx.assert(ctx.getSignal(\"out\", []), bigInt(bigInt(__P__.sub(bigInt(ctx.getSignal(\"in\", []))).mod(__P__)).mul(bigInt(ctx.getSignal(\"inv\", []))).mod(__P__)).add(bigInt(\"1\")).mod(__P__));\n    ctx.assert(bigInt(ctx.getSignal(\"in\", [])).mul(bigInt(ctx.getSignal(\"out\", []))).mod(__P__), \"0\");\n}\n",
+  "IsEqual": "function(ctx) {\n    ctx.setPin(\"isz\", [], \"in\", [], bigInt(ctx.getSignal(\"in\", [\"1\"])).add(__P__).sub(bigInt(ctx.getSignal(\"in\", [\"0\"]))).mod(__P__));\n    ctx.assert(ctx.getPin(\"isz\", [], \"in\", []), bigInt(ctx.getSignal(\"in\", [\"1\"])).add(__P__).sub(bigInt(ctx.getSignal(\"in\", [\"0\"]))).mod(__P__));\n    ctx.setSignal(\"out\", [], ctx.getPin(\"isz\", [], \"out\", []));\n    ctx.assert(ctx.getSignal(\"out\", []), ctx.getPin(\"isz\", [], \"out\", []));\n}\n",
+  "LessThan": "function(ctx) {\n    ctx.setPin(\"num2Bits0\", [], \"in\", [], ctx.getSignal(\"in\", [\"0\"]));\n    ctx.assert(ctx.getPin(\"num2Bits0\", [], \"in\", []), ctx.getSignal(\"in\", [\"0\"]));\n    ctx.setPin(\"num2Bits1\", [], \"in\", [], ctx.getSignal(\"in\", [\"1\"]));\n    ctx.assert(ctx.getPin(\"num2Bits1\", [], \"in\", []), ctx.getSignal(\"in\", [\"1\"]));\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(ctx.getVar(\"n\",[]))) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        ctx.setPin(\"adder\", [], \"in\", [\"0\",ctx.getVar(\"i\",[])], ctx.getPin(\"num2Bits0\", [], \"out\", [ctx.getVar(\"i\",[])]));\n        ctx.assert(ctx.getPin(\"adder\", [], \"in\", [\"0\",ctx.getVar(\"i\",[])]), ctx.getPin(\"num2Bits0\", [], \"out\", [ctx.getVar(\"i\",[])]));\n        ctx.setPin(\"adder\", [], \"in\", [\"1\",ctx.getVar(\"i\",[])], ctx.getPin(\"num2Bits1\", [], \"out\", [ctx.getVar(\"i\",[])]));\n        ctx.assert(ctx.getPin(\"adder\", [], \"in\", [\"1\",ctx.getVar(\"i\",[])]), ctx.getPin(\"num2Bits1\", [], \"out\", [ctx.getVar(\"i\",[])]));\n    }\n\n     }\n    ctx.setSignal(\"out\", [], ctx.getPin(\"adder\", [], \"out\", [bigInt(ctx.getVar(\"n\",[])).add(__P__).sub(bigInt(\"1\")).mod(__P__)]));\n    ctx.assert(ctx.getSignal(\"out\", []), ctx.getPin(\"adder\", [], \"out\", [bigInt(ctx.getVar(\"n\",[])).add(__P__).sub(bigInt(\"1\")).mod(__P__)]));\n}\n",
+  "ValidateVotes": "function(ctx) {\n    ctx.setSignal(\"outPresidentTotalVotes\", [], \"0\");\n    ctx.setSignal(\"outSenatorTotalVotes\", [], \"0\");\n    ctx.setSignal(\"outStateGovernorTotalVotes\", [], \"0\");\n    ctx.setSignal(\"outTotalVotes\", [], \"0\");\n    for (ctx.setVar(\"i\", [], \"0\");bigInt(ctx.getVar(\"i\",[])).lt(bigInt(ctx.getSignal(\"presidentTotalCandidates\", []))) ? 1 : 0;(ctx.setVar(\"i\", [], bigInt(ctx.getVar(\"i\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        if ((bigInt(ctx.getSignal(\"president\", [ctx.getVar(\"i\",[])])).eq(bigInt(\"1\")) ? 1 : 0)) {\n        {\n            ctx.setSignal(\"outPresidentTotalVotes\", [], bigInt(ctx.getSignal(\"outPresidentTotalVotes\", [])).add(bigInt(\"1\")).mod(__P__));\n            ctx.setSignal(\"outTotalVotes\", [], bigInt(ctx.getSignal(\"outTotalVotes\", [])).add(bigInt(\"1\")).mod(__P__));\n            ctx.assert(ctx.getSignal(\"outPresidentTotalVotes\", []), \"1\");\n        }\n\n        }\n    }\n\n     }\n    for (ctx.setVar(\"j\", [], \"0\");bigInt(ctx.getVar(\"j\",[])).lt(bigInt(ctx.getSignal(\"senatorTotalCandidates\", []))) ? 1 : 0;(ctx.setVar(\"j\", [], bigInt(ctx.getVar(\"j\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        if ((bigInt(ctx.getSignal(\"senator\", [ctx.getVar(\"j\",[])])).eq(bigInt(\"1\")) ? 1 : 0)) {\n        {\n            ctx.setSignal(\"outSenatorTotalVotes\", [], bigInt(ctx.getSignal(\"outSenatorTotalVotes\", [])).add(bigInt(\"1\")).mod(__P__));\n            ctx.setSignal(\"outTotalVotes\", [], bigInt(ctx.getSignal(\"outTotalVotes\", [])).add(bigInt(\"1\")).mod(__P__));\n            ctx.assert(ctx.getSignal(\"outSenatorTotalVotes\", []), \"1\");\n        }\n\n        }\n    }\n\n     }\n    for (ctx.setVar(\"k\", [], \"0\");bigInt(ctx.getVar(\"k\",[])).lt(bigInt(ctx.getSignal(\"stateGovernorTotalCandidates\", []))) ? 1 : 0;(ctx.setVar(\"k\", [], bigInt(ctx.getVar(\"k\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__)) { \n    {\n        if ((bigInt(ctx.getSignal(\"stateGovernor\", [ctx.getVar(\"k\",[])])).eq(bigInt(\"1\")) ? 1 : 0)) {\n        {\n            ctx.setSignal(\"outStateGovernorTotalVotes\", [], bigInt(ctx.getSignal(\"outStateGovernorTotalVotes\", [])).add(bigInt(\"1\")).mod(__P__));\n            ctx.setSignal(\"outTotalVotes\", [], bigInt(ctx.getSignal(\"outTotalVotes\", [])).add(bigInt(\"1\")).mod(__P__));\n            ctx.assert(ctx.getSignal(\"outStateGovernorTotalVotes\", []), \"1\");\n        }\n\n        }\n    }\n\n     }\n    ctx.assert(ctx.getSignal(\"presidentTotalVotes\", []), \"1\");\n    ctx.assert(ctx.getSignal(\"senatorTotalVotes\", []), \"1\");\n    ctx.assert(ctx.getSignal(\"stateGovernorTotalVotes\", []), \"1\");\n    ctx.assert(ctx.getSignal(\"totalVotes\", []), bigInt(bigInt(ctx.getSignal(\"presidentTotalVotes\", [])).add(bigInt(ctx.getSignal(\"senatorTotalVotes\", []))).mod(__P__)).add(bigInt(ctx.getSignal(\"stateGovernorTotalVotes\", []))).mod(__P__));\n    ctx.assert(ctx.getSignal(\"outTotalVotes\", []), bigInt(bigInt(ctx.getSignal(\"outPresidentTotalVotes\", [])).add(bigInt(ctx.getSignal(\"outSenatorTotalVotes\", []))).mod(__P__)).add(bigInt(ctx.getSignal(\"outStateGovernorTotalVotes\", []))).mod(__P__));\n    ctx.setPin(\"iszA\", [], \"in\", [], bigInt(ctx.getSignal(\"totalVotes\", [])).add(__P__).sub(bigInt(bigInt(bigInt(ctx.getSignal(\"presidentTotalVotes\", [])).add(bigInt(ctx.getSignal(\"senatorTotalVotes\", []))).mod(__P__)).add(bigInt(ctx.getSignal(\"stateGovernorTotalVotes\", []))).mod(__P__))).mod(__P__));\n    ctx.assert(ctx.getPin(\"iszA\", [], \"in\", []), bigInt(ctx.getSignal(\"totalVotes\", [])).add(__P__).sub(bigInt(bigInt(bigInt(ctx.getSignal(\"presidentTotalVotes\", [])).add(bigInt(ctx.getSignal(\"senatorTotalVotes\", []))).mod(__P__)).add(bigInt(ctx.getSignal(\"stateGovernorTotalVotes\", []))).mod(__P__))).mod(__P__));\n    ctx.assert(ctx.getPin(\"iszA\", [], \"out\", []), \"1\");\n    ctx.setPin(\"iszB\", [], \"in\", [], bigInt(ctx.getSignal(\"outTotalVotes\", [])).add(__P__).sub(bigInt(bigInt(bigInt(ctx.getSignal(\"outPresidentTotalVotes\", [])).add(bigInt(ctx.getSignal(\"outSenatorTotalVotes\", []))).mod(__P__)).add(bigInt(ctx.getSignal(\"outStateGovernorTotalVotes\", []))).mod(__P__))).mod(__P__));\n    ctx.assert(ctx.getPin(\"iszB\", [], \"in\", []), bigInt(ctx.getSignal(\"outTotalVotes\", [])).add(__P__).sub(bigInt(bigInt(bigInt(ctx.getSignal(\"outPresidentTotalVotes\", [])).add(bigInt(ctx.getSignal(\"outSenatorTotalVotes\", []))).mod(__P__)).add(bigInt(ctx.getSignal(\"outStateGovernorTotalVotes\", []))).mod(__P__))).mod(__P__));\n    ctx.assert(ctx.getPin(\"iszB\", [], \"out\", []), \"1\");\n    ctx.setPin(\"isequal\", [], \"in\", [\"0\"], ctx.getPin(\"iszA\", [], \"out\", []));\n    ctx.assert(ctx.getPin(\"isequal\", [], \"in\", [\"0\"]), ctx.getPin(\"iszA\", [], \"out\", []));\n    ctx.setPin(\"isequal\", [], \"in\", [\"1\"], ctx.getPin(\"iszB\", [], \"out\", []));\n    ctx.assert(ctx.getPin(\"isequal\", [], \"in\", [\"1\"]), ctx.getPin(\"iszB\", [], \"out\", []));\n    ctx.assert(ctx.getPin(\"isequal\", [], \"out\", []), \"1\");\n    ctx.assert(ctx.getPin(\"iszB\", [], \"out\", []), ctx.getPin(\"iszA\", [], \"out\", []));\n    ctx.assert(ctx.getVar(\"pc\",[]), ctx.getSignal(\"presidentTotalCandidates\", []));\n    ctx.assert(ctx.getVar(\"sc\",[]), ctx.getSignal(\"senatorTotalCandidates\", []));\n    ctx.assert(ctx.getVar(\"sgc\",[]), ctx.getSignal(\"stateGovernorTotalCandidates\", []));\n}\n"
+ },
+ "functions": {
+  "nbits": {
+   "params": [
+    "a"
+   ],
+   "func": "function(ctx) {\n    ctx.setVar(\"n\", [], \"1\");\n    ctx.setVar(\"r\", [], \"0\");\n    while (bigInt(bigInt(ctx.getVar(\"n\",[])).add(__P__).sub(bigInt(\"1\")).mod(__P__)).lt(bigInt(ctx.getVar(\"a\",[]))) ? 1 : 0) {\n    {\n        (ctx.setVar(\"r\", [], bigInt(ctx.getVar(\"r\",[])).add(bigInt(\"1\")).mod(__P__))).add(__P__).sub(bigInt(1)).mod(__P__);\n        ctx.setVar(\"n\", [], bigInt(ctx.getVar(\"n\",[])).mul(bigInt(\"2\")).mod(__P__));\n    }\n\n    }\n    return ctx.getVar(\"r\",[]);;\n}\n"
+  }
+ },
+ "nPrvInputs": 19,
+ "nPubInputs": 3,
+ "nInputs": 22,
+ "nOutputs": 4,
+ "nVars": 35,
+ "nConstants": 1,
+ "nSignals": 36
+}
