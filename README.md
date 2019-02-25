@@ -39,7 +39,7 @@ Run ganache
 
 optionally, you can build and run with yarn
 ```
-# yarn truffle migrate --reset
+# yarn truffle build
 # yarn truffle test
 ```
 
