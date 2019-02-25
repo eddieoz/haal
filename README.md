@@ -28,8 +28,8 @@ All contributions are welcome.
 ## Setup
 ```
 # npm install
-run ganache
 # node ./node_modules/truffle/build/cli.bundled.js build
+Run ganache
 ```
 
 ## Run
@@ -39,7 +39,7 @@ run ganache
 
 optionally, you can build and run with yarn
 ```
-# yarn truffle migrate --reset
+# yarn truffle build
 # yarn truffle test
 ```
 
