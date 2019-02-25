@@ -28,8 +28,8 @@ All contributions are welcome.
 ## Setup
 ```
 # npm install
-run ganache
 # node ./node_modules/truffle/build/cli.bundled.js build
+Run ganache
 ```
 
 ## Run
