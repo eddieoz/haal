@@ -29,7 +29,7 @@ All contributions are welcome.
 ```
 # npm install
 run ganache
-# node ./node_modules/truffle/build/cli.bundled.js migrate --reset
+# node ./node_modules/truffle/build/cli.bundled.js build
 ```
 
 ## Run
@@ -41,6 +41,28 @@ optionally, you can build and run with yarn
 ```
 # yarn truffle migrate --reset
 # yarn truffle test
+```
+
+### Compile warnings
+
+Is expected to receive the warning below during contracts compilation:
+```
+haal/contracts/HAAL/haal.sol:2:1: Warning: Experimental features are turned on. Do not use experimental features on live deployments.
+pragma experimental ABIEncoderV2;
+^-------------------------------^
+```
+
+That message appears because we're using an experimental method to fill arrays:
+```
+function addVote(
+        bytes[] _president, 
+        bytes[] _senator, 
+        bytes[] _stateGovernor,
+[...]
+```
+and
+```
+function getVotes(uint _index) view public returns(bytes[], bytes[], bytes[])
 ```
 
 Apache License
