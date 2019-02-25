@@ -27,7 +27,7 @@ All contributions are welcome.
 
 ## Setup
 ```
-# yarn install -s
+# yarn install
 # yarn truffle build
 Run ganache (or ganache-cli)
 ```
