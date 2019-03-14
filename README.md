@@ -21,7 +21,7 @@ All contributions are welcome.
 
 ## Pre-requisites
 - ganache-cli ^6.3.0 or Ganache ^1.2.2
-- Node ^8
+- Node 8
 - Solidity ^0.4.5
 - Yarn ^1.13.0
 
