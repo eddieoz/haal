@@ -29,8 +29,8 @@ fs.writeFileSync("../test/voteenc_publicKey.json", _publicKey, "utf8");
 
 
 /* global artifacts */
-const Haal = artifacts.require('./HAAL/haal.sol');
-const Verifier = artifacts.require('./HAAL/verifier.sol');
+const Haal = artifacts.require('./Haal.sol');
+const Verifier = artifacts.require('./Verifier.sol');
 
 
 module.exports = (deployer) => {

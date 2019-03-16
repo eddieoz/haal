@@ -28,8 +28,8 @@ const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.WebsocketProvider('ws://localhost:8545'));
 
 // ### Artifacts
-const Verifier = artifacts.require('../contracts/HAAL/verifier.sol');
-const Haal = artifacts.require('../contracts/HAAL/haal.sol')
+const Verifier = artifacts.require('../contracts/Verifier.sol');
+const Haal = artifacts.require('../contracts/Haal.sol')
 
 const assert = chai.assert;
 
