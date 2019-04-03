@@ -19,6 +19,7 @@ The full protocol makes use of:
 Working in progress.
 All contributions are welcome.
 
+# Installation
 ## Pre-requisites
 - ganache-cli ^6.3.0 or Ganache ^1.2.2
 - Node 8
@@ -36,17 +37,32 @@ All contributions are welcome.
 # yarn truffle test
 ```
 
----
-optionally, you can build and run with npm and node
+## MANUAL INSTALLATION (FOR DEBUGGING PURPOSES)
+
+Install and set the correct version of NodeJS.
 ```
-# npm install -Wno-cast-function-type 2> debug.log
-# node ./node_modules/truffle/build/cli.bundled.js build
-Run ganache (or ganache-cli)
-# node ./node_modules/truffle/build/cli.bundled.js test
+$ apt-get install node npm
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash 
+$ nvm install 8
+$ nvm use 8
+```
+Download third-party dependencies.
+```
+$ curl -o /usr/bin/solc -fL https://github.com/ethereum/solidity/releases/download/v0.4.25/solc-static-linux
+$ chmod u+x /usr/bin/solc
+
+Get https://github.com/trufflesuite/ganache/releases/download/v1.2.2/ganache-1.2.2-x86_64.AppImage
+$ chmod +x ganache-1.2.2-x86_64.AppImage
+```
+Run
+```
+$ npm install -Wno-cast-function-type 2> debug.log
+$ node ./node_modules/truffle/build/cli.bundled.js build
+$ ./ganache-1.2.2-x86_64.AppImage (on a new terminal)
+$ node ./node_modules/truffle/build/cli.bundled.js test
 ```
 
-
-### Compile warnings
+## Compiler warnings
 
 Is expected to receive the warning below during contracts compilation:
 ```
@@ -63,11 +79,9 @@ function addVote(
         bytes[] _stateGovernor,
         ^-----^
 [...]
-```
-and
-```
+
 function getVotes(uint _index) view public returns(bytes[], bytes[], bytes[])
                                                    ^-----------------------^
 ```
 
-Apache License
+Apache License [https://www.apache.org/licenses/LICENSE-2.0](https://www.apache.org/licenses/LICENSE-2.0)
