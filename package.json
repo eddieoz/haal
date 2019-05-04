@@ -28,6 +28,7 @@
   "homepage": "https://github.com/eddieoz/haal#readme",
   "dependencies": {
     "big-integer": "1.6.36",
+    "bignum": "0.12.5",
     "chai": "4.2.0",
     "coinkey": "3.0.0",
     "crypto-browserify": "3.12.0",
