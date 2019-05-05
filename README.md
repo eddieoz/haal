@@ -37,7 +37,7 @@ All contributions are welcome.
 # yarn truffle test
 ```
 
-## MANUAL INSTALLATION (FOR DEBUGGING PURPOSES)
+## Manual installation (for debugging purposes)
 
 Install and set the correct version of NodeJS.
 ```
