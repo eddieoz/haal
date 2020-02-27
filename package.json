@@ -4,7 +4,10 @@
   "description": "Hääl",
   "main": "haal.js",
   "scripts": {
-    "test": "truffle test"
+    "test": "truffle test",
+    "build": "node ./node_modules/truffle/build/cli.bundled.js build",
+    "ganache-cli" : "node node_modules/ganache-cli/cli.js >/dev/null &",
+    "stop" : "kill $(lsof -t -i:8545)"
   },
   "repository": {
     "type": "git",
