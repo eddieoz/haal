@@ -18,7 +18,7 @@ The full protocol makes use of:
 - Ethereum (or another blockchain capable of running dApps)
 - other technologies described on the whitepaper
 
-Working in progress.
+Working in progress. No access control layers implemented in this PoC to avoid overhead, implement it as your needs.
 All contributions are welcome.
 
 # Installation
