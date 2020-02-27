@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/eddieoz/haal/workflows/Node.js%20CI/badge.svg?branch=master)
+
 # Hääl
 # Anonymous Electronic Voting System on Public Blockchains 
 
